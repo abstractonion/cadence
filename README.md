@@ -112,6 +112,10 @@ This rewrites every `rules/*.mdc` from the matching `skills/*/SKILL.md` plus the
 
 Keep rules under ~50 lines and one concern per file — the discipline that makes them useful is the same discipline that keeps them maintainable.
 
+## Contributing
+
+PRs welcome. Edit `skills/<name>/SKILL.md`, update `scripts/cursor-rules.json` if needed, run `./scripts/sync.sh`, and open a PR. See [CONTRIBUTING.md](./CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md).
+
 ## Credits
 
 Workflow rules draw on several upstream projects, all MIT-licensed:
