@@ -4,7 +4,7 @@
 
 ## Who we are
 
-Cadence is an open-source plugin maintained by [abstractonion](https://github.com/abstractonion). The source repository is at [github.com/abstractonion/cadence](https://github.com/abstractonion/cadence).
+Cadence is an open-source plugin maintained by [abstractonion](https://github.com/abstractonion) and [jerry-chibuife](https://github.com/Jerry-Chibuife) of [mbarihaus](https://github.com/mbarihaus). The source repository is at [github.com/abstractonion/cadence](https://github.com/abstractonion/cadence).
 
 ## What Cadence is
 
