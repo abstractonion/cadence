@@ -23,6 +23,8 @@ Each principle lives in two paired places:
 
 ## Install
 
+Logo: `assets/logo.svg`.
+
 ### Cursor
 
 Install via Cursor's plugin flow pointed at:

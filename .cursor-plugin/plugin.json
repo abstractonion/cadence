@@ -1,7 +1,8 @@
 {
   "name": "cadence",
   "displayName": "Cadence",
-  "version": "0.3.4",
+  "logo": "assets/logo.svg",
+  "version": "0.3.5",
   "description": "A disciplined workflow plugin for Cursor, Claude Code, et al.: propose-then-implement, tight feedback loops, and stack conventions across all projects and accounts.",
   "author": {
     "name": "abstractonion",
