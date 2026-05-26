@@ -9,7 +9,7 @@
       "name": "cadence",
       "source": "./",
       "description": "A disciplined workflow skill pack: propose-then-implement, tight feedback loops, and stack conventions across all projects and accounts.",
-      "version": "0.3.5"
+      "version": "0.3.6"
     }
   ]
 }

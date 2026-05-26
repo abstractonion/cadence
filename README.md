@@ -118,6 +118,8 @@ Keep rules under ~50 lines and one concern per file — the discipline that make
 
 PRs welcome. Edit `skills/<name>/SKILL.md`, update `scripts/cursor-rules.json` if needed, run `./scripts/sync.sh`, and open a PR. See [CONTRIBUTING.md](./CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md).
 
+Privacy: [PRIVACY.md](./PRIVACY.md)
+
 ## Credits
 
 Workflow rules draw on several upstream projects, all MIT-licensed:
