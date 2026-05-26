@@ -45,6 +45,10 @@
       "description": "Default to test-first for new behavior and bug fixes — write the failing test, watch it fail for the right reason, then write the minimal code to pass.",
       "alwaysApply": true
     },
+    "prefer-project-local-rules": {
+      "description": "When project-local rules or skills contradict cadence on the same topic, follow the project-local rule and mention the conflict once.",
+      "alwaysApply": true
+    },
     "update-callers-on-contract-changes": {
       "description": "When you change a shared contract (signature, schema field, union variant, dispatch type), update every caller and test in the same change.",
       "alwaysApply": false

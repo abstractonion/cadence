@@ -1,0 +1,25 @@
+---
+description: When project-local rules or skills contradict cadence on the same topic, follow the project-local rule and mention the conflict once.
+alwaysApply: true
+---
+
+# Prefer project-local rules
+
+Cadence is a portable baseline. Repo-specific guidance still wins when both apply.
+
+## When this applies
+
+- The workspace has project rules (e.g. `.cursor/rules`, `AGENTS.md`, repo `SKILL.md` / skills) that address the **same topic** as a cadence rule (naming, ORM, commits, testing, etc.).
+- The two are **similar but not identical**, or the project rule is **stricter or more specific**.
+
+## What to do
+
+1. **Follow the project-local rule** for that topic. Treat cadence as the default only where the repo is silent.
+2. **Mention the conflict once** in plain English (one or two sentences): which source you are following and why (repo-specific).
+3. Do **not** merge contradictory instructions silently. Do **not** argue with the project rule unless the user explicitly asks to override it.
+4. If the user says to ignore project rules or use cadence instead, follow the user's instruction for that session.
+
+## When cadence still applies
+
+- Topics with **no** project-local rule on the same subject.
+- Workflow rules (propose-then-implement, clean commits, loop) unless the project explicitly overrides them.

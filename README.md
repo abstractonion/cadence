@@ -6,11 +6,11 @@ Cadence is a personal workflow plugin that packages durable engineering rules an
 
 ## What's in it
 
-32 rules / skills organized into five groups:
+33 rules / skills organized into five groups:
 
 | Group        | Purpose                                                                  | Count |
 |--------------|--------------------------------------------------------------------------|------:|
-| Workflow     | Always-on engineering loop — think, plan, build, review, test, ship      | 11    |
+| Workflow     | Always-on engineering loop — think, plan, build, review, test, ship      | 12    |
 | Universal    | Language-agnostic principles (imports, file size, refactor completeness) | 8     |
 | TypeScript   | TypeScript-only conventions (no `any`, named exports, `== null`)         | 4     |
 | Frontend     | Frontend patterns (API client, query options, theme tokens, React 19)    | 4     |
@@ -46,6 +46,24 @@ Once installed, all `SKILL.md` files under `skills/` become available to the hos
 
 Any agent runtime that reads SKILL.md files from a directory (Superpowers, custom frameworks, etc.) can consume `skills/` directly. Drop the `skills/` directory into the runtime's skills path or follow the runtime's specific install flow.
 
+## Precedence & conflicts
+
+Cadence is a **baseline** of guardrails, not a replacement for repo rules or custom IDE rules.
+
+**Order of authority** (highest first):
+
+1. Explicit user instruction in the current chat.
+2. Project/repo rules and skills (`.cursor/rules`, `AGENTS.md`, repo `SKILL.md` / skills).
+3. Cadence plugin rules.
+
+When cadence and a project rule cover the **same topic** but differ, **follow the project rule** and note the conflict once in plain English. Cadence fills gaps where the repo is silent.
+
+Multiple rule sources can load into the same session; there is no guaranteed automatic winner besides this policy. The `prefer-project-local-rules` workflow rule encodes it for the agent.
+
+You can **disable individual cadence rules** in Cursor Settings → Rules, or turn off the plugin for a project, if overlap is noisy.
+
+On Claude Code and other SKILL.md runtimes, the same idea applies: repo skills override plugin skills on the same topic unless the user says otherwise.
+
 ## Repository layout
 
 ```
@@ -58,11 +76,11 @@ cadence/
 ├── skills/                      # Canonical source of truth — SKILL.md format
 │   ├── propose-then-implement/SKILL.md
 │   ├── no-any-no-casts/SKILL.md
-│   └── ... (32 total)
+│   └── ... (33 total)
 ├── rules/                       # Cursor-only flat .mdc shims, generated from skills/
 │   ├── propose-then-implement.mdc
 │   ├── no-any-no-casts.mdc
-│   └── ... (32 total)
+│   └── ... (33 total)
 ├── scripts/
 │   ├── cursor-rules.json        # per-rule Cursor frontmatter (globs / alwaysApply)
 │   └── sync.sh                  # regenerates rules/*.mdc from skills/*/SKILL.md
