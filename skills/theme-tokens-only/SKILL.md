@@ -1,0 +1,22 @@
+---
+name: theme-tokens-only
+description: Use when writing frontend styles — pull colors, spacing, typography, radii, and shadows from the design system's theme tokens; no raw hex/RGB or magic pixels.
+---
+
+# Theme tokens, not raw values
+
+Pull colors, spacing, typography, radii, and shadows from the project's design tokens (theme object, CSS variables, Tailwind config, etc.).
+
+## Don't
+
+- Don't introduce literal hex codes (`"#3366ff"`) or RGB/RGBA values for colors that exist in the theme.
+- Don't introduce magic pixel values for spacing/sizes that have a token (`8px`, `16px`, `24px` are almost always `theme.spacing(...)` or `--space-*`).
+- Don't ship custom box-shadows or gradients without checking whether the system has one.
+
+## Do
+
+- For colors: `theme.palette.text.primary`, `var(--color-text-primary)`, `text-primary` — whatever the project's convention is.
+- For component-API color props that don't accept token strings: pull the value from the theme/token source explicitly rather than hardcoding.
+- If the design genuinely needs a new token, add it to the token source — don't sprinkle the literal value across files.
+
+If a value you need doesn't exist as a token, stop and confirm whether to add a new token or use an existing one before hardcoding.

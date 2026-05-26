@@ -1,0 +1,23 @@
+---
+name: no-placeholder-sentinels
+description: Use when modeling lifecycle or state — represent distinct conceptual states with explicit enums or unions instead of collapsing them onto "", 0, None, or null.
+---
+
+# No placeholder sentinels for distinct states
+
+If "not yet set", "explicitly empty", "in progress", and "failed" are conceptually different, they should be different values in the type — not all collapsed onto `""`, `0`, `None`, or `null`.
+
+## Prefer
+
+- A dedicated enum / tagged union / discriminated union for lifecycle state.
+- Optional fields where "absent" genuinely means "unknown".
+- A wrapper type (e.g. `Result<T, E>`, `Loaded<T>`) when callers need to branch.
+
+## Avoid
+
+- Empty string as "no value yet".
+- `0` as "not initialized".
+- `None` / `null` when "loading" and "failed" both map to it.
+- Magic strings like `"PENDING"` mixed with real data values.
+
+When the right model isn't obvious, stop and propose options before encoding ambiguity into the type.

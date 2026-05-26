@@ -1,0 +1,21 @@
+---
+description: When you change a shared contract (signature, schema field, union variant, dispatch type), update every caller and test in the same change.
+alwaysApply: false
+---
+
+# Update callers when contracts change
+
+A "shared contract" is anything other code depends on by shape:
+
+- Function/method signatures.
+- API schema fields (request/response, GraphQL types, protobuf, OpenAPI).
+- Union/enum variants and discriminator values.
+- Event payload shapes, message types, dispatch tables.
+- Public types/interfaces exported from a module.
+
+## What to do
+
+- Before changing the contract, search for callers (grep the symbol name, the field name, and any string-based dispatch key).
+- Update each caller and its tests in the same PR.
+- Update evals / fixtures / snapshots that encode the shape.
+- If the contract crosses a service boundary, plan compatibility (versioning or lockstep deploy) explicitly — don't quietly break consumers.

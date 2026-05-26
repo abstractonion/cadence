@@ -1,0 +1,28 @@
+---
+description: Investigate root cause before writing any fix; cap hypothesis attempts
+alwaysApply: true
+---
+
+# No Fixes Without Investigation
+
+When a bug, failing test, or unexpected behavior appears, do not patch the symptom. Find the root cause, then fix it. Symptom-patching creates whack-a-mole debugging, and every fix that doesn't address root cause makes the next bug harder to find.
+
+## Sequence
+
+1. **Reproduce.** If you can't trigger it deterministically, gather more evidence before forming a hypothesis. Read the stack trace, the relevant code path, and recent diffs touching those files.
+2. **One testable hypothesis at a time**, in a single sentence: "X is wrong because Y." Confirm by reading the exact code that would prove it, or by adding a temporary log/assertion — never by guessing from the error string alone.
+3. **3-strike rule.** If three hypotheses fail, stop. The bug is probably structural. Surface to the user: what was tried, what was ruled out, the next two reasonable directions.
+4. **Fix the cause, not the closest symptom.** The smallest diff that eliminates the actual problem. Resist refactoring adjacent code in the same commit.
+5. **Regression test that fails without the fix and passes with it.** A test that always passes proves nothing.
+
+## Red flags — slow down if you catch yourself doing these
+
+- Proposing a fix before tracing the data flow. You're guessing.
+- Each fix reveals a new problem one layer deeper. You're at the wrong layer.
+- "Quick fix for now." There is no "for now" — fix it right or hand it back with what you learned.
+
+## Lock the blast radius
+
+If the fix would touch more than ~5 files, pause. Either the root cause genuinely spans them (say so), or scope is creeping. Offer to split: critical path now, the rest deferred.
+
+Recurring bugs in the same files are an architectural smell, not a coincidence. Say so when you see it.

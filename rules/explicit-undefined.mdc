@@ -1,0 +1,34 @@
+---
+description: TypeScript — prefer explicit `| undefined` over optional `?:` for data-shaped fields.
+globs: "**/*.{ts,tsx}"
+---
+
+# TypeScript: prefer explicit `| undefined` over optional `?:`
+
+For data-shaped fields and props that callers must reason about, type them as `T | undefined` rather than `field?: T`.
+
+## Prefer
+
+```ts
+type Props = {
+  projectId: string | undefined;
+  user: User | undefined;
+};
+```
+
+## Avoid
+
+```ts
+type Props = {
+  projectId?: string;
+  user?: User;
+};
+```
+
+## Why
+
+Explicit `| undefined` forces every caller to make a deliberate decision about the missing case. Optional `?:` lets callers silently forget the field exists, which masks bugs.
+
+## When `?:` is fine
+
+Pure UI affordance flags where "omitted" obviously means "off": `showHeader?`, `disabled?`, `hideFooter?`. These don't carry data and have a sensible default-false interpretation.

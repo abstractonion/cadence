@@ -1,0 +1,133 @@
+{
+  "_doc": "Cursor-specific metadata for each skill. Consumed by scripts/sync.sh to regenerate rules/<name>.mdc from skills/<name>/SKILL.md. The description here is the Cursor-style brief (one line summary); the SKILL.md description is the Claude Code trigger sentence.",
+  "rules": {
+    "propose-then-implement": {
+      "description": "Default to propose-then-implement. Investigate, present options, wait for approval before changing code.",
+      "alwaysApply": true
+    },
+    "investigate-before-fixing": {
+      "description": "Investigate root cause before writing any fix; cap hypothesis attempts",
+      "alwaysApply": true
+    },
+    "loop": {
+      "description": "End-to-end engineering loop — think, plan, build, review, test, ship, reflect",
+      "alwaysApply": true
+    },
+    "verify-with-runtime": {
+      "description": "Verify changes against real runtime evidence before claiming done; stale evidence is not evidence",
+      "alwaysApply": true
+    },
+    "self-review-before-handoff": {
+      "description": "Read your own diff like a stranger before declaring done; calibrate confidence with quoted evidence",
+      "alwaysApply": true
+    },
+    "clean-commits": {
+      "description": "Keep commits and PRs surgical. Exclude unrelated changes; target the right branch.",
+      "alwaysApply": true
+    },
+    "capture-learnings": {
+      "description": "After shipping or debugging, capture one durable lesson per session",
+      "alwaysApply": true
+    },
+    "manage-context-window": {
+      "description": "Treat the context window as a finite budget; prefer narrow reads, delegation, and clean handoffs over dragging stale context forward.",
+      "alwaysApply": true
+    },
+    "delegate-with-fresh-context": {
+      "description": "For self-contained subtasks, delegate to a fresh subagent with a precise brief instead of inheriting your conversation context.",
+      "alwaysApply": true
+    },
+    "break-work-into-verifiable-steps": {
+      "description": "Decompose non-trivial work into a sequence of small, independently verifiable steps with explicit acceptance checks per step.",
+      "alwaysApply": true
+    },
+    "tests-first-by-default": {
+      "description": "Default to test-first for new behavior and bug fixes — write the failing test, watch it fail for the right reason, then write the minimal code to pass.",
+      "alwaysApply": true
+    },
+    "update-callers-on-contract-changes": {
+      "description": "When you change a shared contract (signature, schema field, union variant, dispatch type), update every caller and test in the same change.",
+      "alwaysApply": false
+    },
+    "run-lint-and-typecheck": {
+      "description": "After edits, run the project's linter and type checker; fix what you introduced.",
+      "alwaysApply": false
+    },
+    "no-placeholder-sentinels": {
+      "description": "Don't reuse \"\", 0, None, or null as sentinel values for distinct lifecycle states — model the state explicitly.",
+      "alwaysApply": false
+    },
+    "never-edit-generated-code": {
+      "description": "Never hand-edit generated/codegen output; change the source schema and regenerate.",
+      "alwaysApply": false
+    },
+    "keep-files-focused": {
+      "description": "Keep files small and single-purpose; split by responsibility when they grow.",
+      "alwaysApply": false
+    },
+    "imports-at-top": {
+      "description": "Keep imports at the top of the file; avoid inline or mid-function imports.",
+      "alwaysApply": false
+    },
+    "feature-local-by-default": {
+      "description": "New code lives next to the feature that uses it; promote to shared only when broadly reused.",
+      "alwaysApply": false
+    },
+    "complete-refactors": {
+      "description": "Refactors must land complete in one change — no orphan call sites, legacy aliases, or compat shims.",
+      "alwaysApply": false
+    },
+    "nullable-equality": {
+      "description": "TypeScript — use `== null` / `!= null` for nullability checks; strict equality everywhere else.",
+      "globs": "**/*.{ts,tsx}"
+    },
+    "no-any-no-casts": {
+      "description": "TypeScript — don't use `any` or `as` casts to bypass the type system.",
+      "globs": "**/*.{ts,tsx}"
+    },
+    "named-exports": {
+      "description": "TypeScript — use named exports; avoid `export default`.",
+      "globs": "**/*.{ts,tsx}"
+    },
+    "explicit-undefined": {
+      "description": "TypeScript — prefer explicit `| undefined` over optional `?:` for data-shaped fields.",
+      "globs": "**/*.{ts,tsx}"
+    },
+    "theme-tokens-only": {
+      "description": "Frontend — use the design system's theme tokens for colors, spacing, and typography; no raw hex/RGB or magic pixel values.",
+      "globs": "**/*.{ts,tsx,css,scss}"
+    },
+    "react-compiler": {
+      "description": "React 19 + Compiler — default to no manual memoization; only reach for it when referential identity genuinely matters.",
+      "globs": "**/*.{tsx,jsx}"
+    },
+    "prefer-generated-api-client": {
+      "description": "Frontend — use the project's generated/typed API client wrapper; never raw fetch/axios.",
+      "globs": "**/*.{ts,tsx}"
+    },
+    "centralized-query-options": {
+      "description": "Frontend — define server-state queries/mutations via centralized option factories; avoid ad-hoc inline keys.",
+      "globs": "**/*.{ts,tsx}"
+    },
+    "register-models-in-admin": {
+      "description": "Backend — when adding a new ORM model that has an admin/inspection UI, register it with a minimal usable configuration or document why not.",
+      "globs": "**/{models,admin}.py"
+    },
+    "percent-style-logging": {
+      "description": "Backend — in Python logging, pass format args as separate parameters (%s style); don't pre-format with f-strings.",
+      "globs": "**/*.py"
+    },
+    "no-hacking-central-infra": {
+      "description": "Backend — don't modify central infrastructure (settings, base classes, middleware, shared fixtures) to make a single test or eval pass.",
+      "globs": "**/*.py"
+    },
+    "dont-apply-migrations": {
+      "description": "Backend — generate migrations during development; do not run/apply them against shared databases on the user's behalf.",
+      "globs": "**/*.py"
+    },
+    "async-orm-relations": {
+      "description": "Backend — in async code, eagerly fetch related ORM fields; don't rely on implicit lazy loading.",
+      "globs": "**/*.py"
+    }
+  }
+}

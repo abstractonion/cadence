@@ -1,0 +1,22 @@
+---
+name: prefer-generated-api-client
+description: Use when making a frontend backend call — go through the project's generated/typed API client; never reach for raw `fetch` or `axios` when a typed client exists.
+---
+
+# Use the project's typed API client
+
+If the project ships a generated client SDK (OpenAPI codegen, GraphQL codegen, tRPC, gRPC-web, etc.), all backend calls go through it.
+
+## Why
+
+- Request/response types stay in sync with the backend schema.
+- Auth header injection, base URL config, error handling, and interceptors live in one place.
+- Refactors of the backend contract surface as type errors at call sites.
+
+## Rules
+
+- Don't reach for raw `fetch` / `axios` / `XMLHttpRequest` when a typed client exists.
+- Don't manually type response shapes that the generated client already exports — import them from the generator output.
+- If you genuinely need raw fetch (e.g. streaming responses the SDK can't model), put it behind a small typed wrapper that lives next to the rest of the client config.
+
+If the project has no generated client and the call is non-trivial, propose creating a small typed wrapper before sprinkling raw fetches.

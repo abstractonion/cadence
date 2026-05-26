@@ -1,0 +1,21 @@
+---
+description: Backend — when adding a new ORM model that has an admin/inspection UI, register it with a minimal usable configuration or document why not.
+globs: "**/{models,admin}.py"
+---
+
+# Register new models in admin
+
+Frameworks with a built-in admin/inspection UI (Django admin, Rails ActiveAdmin, Strapi, Payload, etc.) become useless when half the models are missing.
+
+## Default
+
+- For each new model, add a minimal admin/inspection registration: list display, searchable fields, sensible filters.
+- For tenant-scoped or otherwise restricted data, add the scoping in the admin class — don't expose a foot-gun.
+
+## When to skip
+
+- Pure join tables.
+- Internal denormalization caches the user is not supposed to inspect directly.
+- Truly transient/log-like tables where the cost of accidental edits outweighs the inspection benefit.
+
+In every "skip" case, leave a one-line comment in `models.py` (or the equivalent) explaining why so a future agent doesn't add it by reflex.

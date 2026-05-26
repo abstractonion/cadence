@@ -1,0 +1,27 @@
+{
+  "name": "cadence",
+  "displayName": "Cadence",
+  "version": "0.3.2",
+  "description": "A disciplined workflow plugin for Cursor, Claude Code, et al.: propose-then-implement, tight feedback loops, and stack conventions across all projects and accounts.",
+  "author": {
+    "name": "abstractonion",
+    "url": "https://github.com/abstractonion"
+  },
+  "homepage": "https://github.com/abstractonion/cadence",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abstractonion/cadence"
+  },
+  "license": "MIT",
+  "keywords": [
+    "workflow",
+    "rules",
+    "skills",
+    "code-quality",
+    "engineering-loop",
+    "typescript",
+    "react",
+    "discipline"
+  ],
+  "rules": "./rules/"
+}

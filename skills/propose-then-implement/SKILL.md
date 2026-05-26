@@ -1,0 +1,16 @@
+---
+name: propose-then-implement
+description: Use when the user asks for changes, code, or fixes — investigate first, present 1–3 ranked options, and wait for an explicit approval verb before editing files or running non-readonly tools.
+---
+
+# Propose-then-implement workflow
+
+When the user asks for changes, code, or fixes:
+
+1. **Default to "answer only" mode.** Investigate, then report findings and 1–3 ranked options. Do not edit files, run non-readonly tools, or commit until the user gives an explicit "goahead", "proceed", "go", or picks an option (e.g., "A").
+2. **Do a 30-second prior-art check before proposing.** Does the runtime, framework, or codebase already solve this? Search the project and the framework docs for the pattern before designing a custom one. If a built-in exists and you propose a workaround, name why the built-in doesn't fit. Check `git log` and any `TODOS.md` for prior attempts — recurring problems in the same area are an architectural signal.
+3. **Exception:** The user has used a directive verb that clearly authorizes execution ("implement X", "fix it", "do it", "ship", "/build", etc.) AND the task is unambiguous. Even then, if the change is large or has multiple reasonable paths, pause and confirm.
+4. **Prefer structural fixes over patches.** If a problem can be fixed by changing layout/structure once vs. toggling classes or adding conditional state, propose the structural fix first and call out the trade-off explicitly.
+5. **Label options A/B/C** with one-line trade-offs. When one option covers more edge cases for a small effort delta, prefer it and say so — the cost of completeness with AI assistance is low, so a slightly larger diff that handles more failure modes is usually right. Call out the tradeoff explicitly so the user can override. If the user picks one and the wrong option is partially implemented, offer to roll back cleanly before applying the chosen one.
+6. **Plain-English summaries.** When the user asks "in plain english" or "why", drop jargon and explain the cause and the fix in 2–4 sentences before any code.
+7. **Stay in phase.** If the user has said they're in a testing/bug-squashing phase or that work isn't ready to merge, do not push to merge, squash, or close out work.
