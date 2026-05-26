@@ -114,6 +114,32 @@ This rewrites every `rules/*.mdc` from the matching `skills/*/SKILL.md` plus the
 
 Keep rules under ~50 lines and one concern per file — the discipline that makes them useful is the same discipline that keeps them maintainable.
 
+## Commands
+
+User-invoked slash commands that prime the agent into a specific mode for a single turn. Each command names the phase of work it covers and anchors to the cadence rules that govern that phase. Use them when you want the agent to investigate, propose, plan, review, verify, ship, audit, or reflect — without dragging in unrelated behaviour.
+
+| Command | Description |
+| --- | --- |
+| `/propose` | Surface 1–3 options before any change. For design, product, or architecture decisions where you want choices, not work. |
+| `/investigate` | Root-cause a bug or unexpected behavior without patching. Ranks hypotheses, returns evidence, no file edits. |
+| `/plan` | Decompose the current task into independently verifiable steps with per-step checks. |
+| `/diff-check` | Self-review the staged diff like a stranger, with quoted evidence. Surfaces scope drift and weak claims. |
+| `/verify` | Run runtime verification (browser, tests, manual) on the current change before claiming done. |
+| `/ship` | Walk the clean-commits → lint/typecheck → verify → commit sequence. Refuses unrelated files. |
+| `/audit` | Apply all applicable cadence rules to the current file or staged diff and report findings. |
+| `/reflect` | Capture one durable lesson from the session into a learnings log. |
+
+## Subagents
+
+Specialized personas the parent agent can delegate to with a fresh context window. Each subagent has a narrow remit and refuses work outside it, so the parent gets a focused report back instead of a sprawling side-quest. The descriptions are written across roles so engineering, design, and product mgmt can each find a fit for their mental model.
+
+| Subagent | When to delegate |
+| --- | --- |
+| `cadence-investigator` | Bug investigation, root-cause analysis, or any task where the parent should rule out hypotheses before any code change. |
+| `cadence-reviewer` | Code review on a diff before commit or push. Use when the parent needs an independent read on quality, scope, and evidence. |
+| `cadence-shipper` | Final commit and verification pass before pushing. Use when the parent has working code and needs ship discipline applied. |
+| `cadence-planner` | Coordination planning when a task spans multiple independent workstreams (areas, services, files) and needs explicit dependencies plus parallelism mapped. |
+
 ## Contributing
 
 PRs welcome. Edit `skills/<name>/SKILL.md`, update `scripts/cursor-rules.json` if needed, run `./scripts/sync.sh`, and open a PR. See [CONTRIBUTING.md](./CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md).
