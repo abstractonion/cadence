@@ -35,7 +35,7 @@ For the full command and subagent catalogs, see the [Commands](./README.md#comma
    - `# <Title>` — one short paragraph: what mode the agent enters this turn and what it must not do.
    - `## Anchored in` — bullet list of `skills/<name>` rule stems this command invokes (no file extension).
 3. Keep the file under ~25 lines; one phase of work per command.
-4. Add a row to the Commands table in README.md; the `description` in frontmatter must match the table verbatim.
+4. Add a row to the Commands table in README.md; the `description` in frontmatter must match the table verbatim. List bare `/name` in the table — Cursor invokes that form; Claude Code uses `/cadence:name` (see README § Commands).
 5. If you are adding a new top-level directory (unlikely), declare it in `.cursor-plugin/plugin.json` and `.claude-plugin/plugin.json` under `commands`. For a new file inside the existing `commands/` directory, just add the file — the manifest already points at `./commands/`.
 
 ## New subagent checklist
@@ -54,7 +54,7 @@ For the full command and subagent catalogs, see the [Commands](./README.md#comma
 
 ### cadence-planner
 
-`cadence-planner` is for **cross-workstream coordination only** — multiple independent threads (e.g. backend + frontend + migration) with explicit dependencies and parallelism. Single-thread decomposition belongs to the `/plan` command and `break-work-into-verifiable-steps`; if a task fits one workstream, do not extend `cadence-planner` — point users at `/plan` instead.
+`cadence-planner` is for **cross-workstream coordination only** — multiple independent threads (e.g. backend + frontend + migration) with explicit dependencies and parallelism. Single-thread decomposition belongs to the `/plan` command (`/cadence:plan` in Claude Code) and `break-work-into-verifiable-steps`; if a task fits one workstream, do not extend `cadence-planner` — point users at `/plan` instead.
 
 ## Sanitization
 

@@ -116,7 +116,7 @@ Keep rules under ~50 lines and one concern per file — the discipline that make
 
 ## Commands
 
-User-invoked slash commands that prime the agent into a specific mode for a single turn. Each command names the phase of work it covers and anchors to the cadence rules that govern that phase. Use them when you want the agent to investigate, propose, plan, review, verify, ship, audit, or reflect — without dragging in unrelated behaviour.
+User-invoked slash commands that prime the agent into a specific mode for a single turn. Each command names the phase of work it covers and anchors to the cadence rules that govern that phase. Use them when you want the agent to investigate, propose, plan, review, verify, ship, audit, or reflect — without dragging in unrelated behaviour. In **Cursor**, type the bare name (for example `/propose`); in **Claude Code** after `/plugin install cadence@cadence`, use the plugin namespace (for example `/cadence:propose`).
 
 | Command | Description |
 | --- | --- |
@@ -128,6 +128,8 @@ User-invoked slash commands that prime the agent into a specific mode for a sing
 | `/ship` | Walk the clean-commits → lint/typecheck → verify → commit sequence. Refuses unrelated files. |
 | `/audit` | Apply all applicable cadence rules to the current file or staged diff and report findings. |
 | `/reflect` | Capture one durable lesson from the session into a learnings log. |
+
+*Cursor:* `/name` as listed. *Claude Code* (plugin install): `/cadence:name` (plugin `name` in `.claude-plugin/plugin.json` is `cadence`).
 
 ## Subagents
 
