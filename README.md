@@ -33,7 +33,7 @@ Install via Cursor's plugin flow pointed at:
 https://github.com/abstractonion/cadence
 ```
 
-Once installed, all `.mdc` files under `rules/` are auto-discovered. Workflow rules apply on every chat; stack-scoped rules attach based on the file globs in their frontmatter.
+Once installed, all `.mdc` files under `rules/` are auto-discovered. Workflow rules apply on every chat; stack-scoped rules attach based on the file globs in their frontmatter. Slash commands and subagents ship from `commands/` and `agents/` via the same plugin manifest.
 
 ### Claude Code
 
@@ -91,7 +91,7 @@ cadence/
 └── NOTICE.md                    # upstream-source attribution
 ```
 
-`skills/` is the single source of truth for rule bodies. `rules/` is a generated Cursor-only directory: each `.mdc` carries the same body wrapped with Cursor-specific frontmatter (`globs` for stack-scoped rules, `alwaysApply: true` for workflow rules). The manifests act as filters into the same content tree — Cursor reads `rules/` plus bundled `commands/` and `agents/`; SKILL.md-aware runtimes (Claude Code, Superpowers, etc.) read `skills/` plus the same `commands/` and `agents/` paths where the host supports them — so neither runtime sees the other's rule metadata, and the same principle ships to both in one repo.
+`skills/` is the single source of truth for rule bodies. `rules/` is a generated Cursor-only directory: each `.mdc` carries the same body wrapped with Cursor-specific frontmatter (`globs` for stack-scoped rules, `alwaysApply: true` for workflow rules). The two manifests act as filters into the same content tree — Cursor reads `rules/`; SKILL.md-aware runtimes (Claude Code, Superpowers, etc.) read `skills/` — so neither runtime sees the other's metadata, and the same principle ships to both in one repo.
 
 ## Customize
 
