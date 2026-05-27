@@ -33,7 +33,7 @@ Install via Cursor's plugin flow pointed at:
 https://github.com/abstractonion/cadence
 ```
 
-Once installed, all `.mdc` files under `rules/` are auto-discovered. Workflow rules apply on every chat; stack-scoped rules attach based on the file globs in their frontmatter. Slash commands and subagents ship from `commands/` and `agents/` via the same plugin manifest.
+Once installed, all `.mdc` files under `rules/` are auto-discovered. Workflow rules apply on every chat; stack-scoped rules attach based on the file globs in their frontmatter.
 
 ### Claude Code
 
@@ -42,7 +42,7 @@ Once installed, all `.mdc` files under `rules/` are auto-discovered. Workflow ru
 /plugin install cadence@cadence
 ```
 
-Once installed, all `SKILL.md` files under `skills/` become available to the host runtime; each skill loads when its `description` trigger matches the current task.
+Once installed, all `SKILL.md` files under `skills/` become available to the host runtime; each skill loads when its `description` trigger matches the current task. Slash commands and subagents ship from `commands/` and `agents/` via the same plugin manifest.
 
 ### Other runtimes
 
