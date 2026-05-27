@@ -10,4 +10,6 @@ You are auditing the current file or staged diff this turn against every applica
 
 ## Anchored in
 
-- cadence rules (cross-cutting)
+- self-review-before-handoff
+- run-lint-and-typecheck
+- verify-with-runtime
