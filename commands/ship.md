@@ -1,6 +1,7 @@
 ---
 name: ship
 description: Walk the clean-commits → lint/typecheck → verify → commit sequence. Refuses unrelated files.
+disable-model-invocation: true
 ---
 
 # Ship

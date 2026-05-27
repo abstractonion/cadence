@@ -30,7 +30,7 @@ For the full command and subagent catalogs, see the [Commands](./README.md#comma
 
 ## New command checklist
 
-1. Create `commands/<name>.md` with YAML frontmatter: `name` (slash name, no leading `/`) and `description` (what users see in menus and triggers — write for cross-role legibility: engineering, design, and product should each understand when to use it).
+1. Create `commands/<name>.md` with YAML frontmatter: `name` (slash name, no leading `/`), `description` (what users see in menus and triggers — write for cross-role legibility: engineering, design, and product should each understand when to use it), and `disable-model-invocation: true` so Claude Code does not auto-invoke user-facing slash commands from description matching (Cursor may ignore unknown keys; harmless).
 2. Body structure:
    - `# <Title>` — one short paragraph: what mode the agent enters this turn and what it must not do.
    - `## Anchored in` — bullet list of `skills/<name>` rule stems this command invokes (no file extension).
@@ -40,7 +40,7 @@ For the full command and subagent catalogs, see the [Commands](./README.md#comma
 
 ## New subagent checklist
 
-1. Create `agents/<name>.md` with YAML frontmatter: `name` and `description` (menu/trigger text; same cross-role legibility as commands).
+1. Create `agents/<name>.md` with YAML frontmatter: `name` and `description` (menu/trigger text; same cross-role legibility as commands). Read-only subagents (no file edits) should add `disallowedTools: Write, Edit` per [Claude Code subagent docs](https://code.claude.com/docs/en/sub-agents). Mutating workflows (e.g. `cadence-shipper`) omit tool restrictions.
 2. Body structure — all five sections, in order:
    - `# <Title>` — opening paragraph: remit, how the parent delegates, and what you refuse.
    - `## Scope` — what you do.

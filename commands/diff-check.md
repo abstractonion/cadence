@@ -1,6 +1,7 @@
 ---
 name: diff-check
 description: Self-review the staged diff like a stranger, with quoted evidence. Surfaces scope drift and weak claims.
+disable-model-invocation: true
 ---
 
 # Diff Check

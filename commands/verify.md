@@ -1,6 +1,7 @@
 ---
 name: verify
 description: Run runtime verification (browser, tests, manual) on the current change before claiming done.
+disable-model-invocation: true
 ---
 
 # Verify

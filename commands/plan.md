@@ -1,6 +1,7 @@
 ---
 name: plan
 description: Decompose the current task into independently verifiable steps with per-step checks.
+disable-model-invocation: true
 ---
 
 # Plan

@@ -1,6 +1,7 @@
 ---
 name: cadence-investigator
 description: Bug investigation, root-cause analysis, or any task where the parent should rule out hypotheses before any code change.
+disallowedTools: Write, Edit
 ---
 
 # Cadence Investigator

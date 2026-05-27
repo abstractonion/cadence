@@ -1,6 +1,7 @@
 ---
 name: cadence-planner
 description: Coordination planning when a task spans multiple independent workstreams (areas, services, files) and needs explicit dependencies plus parallelism mapped.
+disallowedTools: Write, Edit
 ---
 
 # Cadence Planner

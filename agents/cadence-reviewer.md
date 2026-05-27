@@ -1,6 +1,7 @@
 ---
 name: cadence-reviewer
 description: Code review on a diff before commit or push. Use when the parent needs an independent read on quality, scope, and evidence.
+disallowedTools: Write, Edit
 ---
 
 # Cadence Reviewer
