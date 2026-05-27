@@ -33,7 +33,7 @@ Install via Cursor's plugin flow pointed at:
 https://github.com/abstractonion/cadence
 ```
 
-Once installed, all `.mdc` files under `rules/` are auto-discovered. Workflow rules apply on every chat; stack-scoped rules attach based on the file globs in their frontmatter.
+Once installed, all `.mdc` files under `rules/` are auto-discovered. Workflow rules apply on every chat; stack-scoped rules attach based on the file globs in their frontmatter. Slash commands and subagents ship from `commands/` and `agents/` via the same plugin manifest.
 
 ### Claude Code
 
@@ -42,7 +42,7 @@ Once installed, all `.mdc` files under `rules/` are auto-discovered. Workflow ru
 /plugin install cadence@cadence
 ```
 
-Once installed, all `SKILL.md` files under `skills/` become available to the host runtime; each skill loads when its `description` trigger matches the current task.
+Once installed, all `SKILL.md` files under `skills/` become available to the host runtime; each skill loads when its `description` trigger matches the current task. Slash commands and subagents ship from `commands/` and `agents/` via the same plugin manifest.
 
 ### Other runtimes
 
@@ -71,7 +71,7 @@ On Claude Code and other SKILL.md runtimes, the same idea applies: repo skills o
 ```
 cadence/
 ├── .cursor-plugin/
-│   └── plugin.json              # Cursor manifest
+│   └── plugin.json              # Cursor manifest (rules, commands, agents)
 ├── .claude-plugin/
 │   ├── plugin.json              # Claude Code plugin manifest
 │   └── marketplace.json         # Claude Code marketplace registration
@@ -83,6 +83,8 @@ cadence/
 │   ├── propose-then-implement.mdc
 │   ├── no-any-no-casts.mdc
 │   └── ... (33 total)
+├── commands/                    # User-invoked slash-command primers (single-turn modes)
+├── agents/                      # Delegatable subagent personas
 ├── scripts/
 │   ├── cursor-rules.json        # per-rule Cursor frontmatter (globs / alwaysApply)
 │   └── sync.sh                  # regenerates rules/*.mdc from skills/*/SKILL.md
@@ -113,6 +115,34 @@ This rewrites every `rules/*.mdc` from the matching `skills/*/SKILL.md` plus the
 4. Commit both files together.
 
 Keep rules under ~50 lines and one concern per file — the discipline that makes them useful is the same discipline that keeps them maintainable.
+
+## Commands
+
+User-invoked slash commands that prime the agent into a specific mode for a single turn. Each command names the phase of work it covers and anchors to the cadence rules that govern that phase. Use them when you want the agent to investigate, propose, plan, review, verify, ship, audit, or reflect — without dragging in unrelated behaviour. In **Cursor**, type the bare name (for example `/propose`); in **Claude Code** after `/plugin install cadence@cadence`, use the plugin namespace (for example `/cadence:propose`).
+
+| Command | Description |
+| --- | --- |
+| `/propose` | Surface 1–3 options before any change. For design, product, or architecture decisions where you want choices, not work. |
+| `/investigate` | Root-cause a bug or unexpected behavior without patching. Ranks hypotheses, returns evidence, no file edits. |
+| `/plan` | Decompose the current task into independently verifiable steps with per-step checks. |
+| `/diff-check` | Self-review the staged diff like a stranger, with quoted evidence. Surfaces scope drift and weak claims. |
+| `/verify` | Run runtime verification (browser, tests, manual) on the current change before claiming done. |
+| `/ship` | Walk the clean-commits → lint/typecheck → verify → commit sequence. Refuses unrelated files. |
+| `/audit` | Apply all applicable cadence rules to the current file or staged diff and report findings. |
+| `/reflect` | Capture one durable lesson from the session into a learnings log. |
+
+*Cursor:* `/name` as listed. *Claude Code* (plugin install): `/cadence:name` (plugin `name` in `.claude-plugin/plugin.json` is `cadence`).
+
+## Subagents
+
+Specialized personas the parent agent can delegate to with a fresh context window. Each subagent has a narrow remit and refuses work outside it, so the parent gets a focused report back instead of a sprawling side-quest. The descriptions are written across roles so engineering, design, and product mgmt can each find a fit for their mental model.
+
+| Subagent | When to delegate |
+| --- | --- |
+| `cadence-investigator` | Bug investigation, root-cause analysis, or any task where the parent should rule out hypotheses before any code change. |
+| `cadence-reviewer` | Code review on a diff before commit or push. Use when the parent needs an independent read on quality, scope, and evidence. |
+| `cadence-shipper` | Final commit and verification pass before pushing. Use when the parent has working code and needs ship discipline applied. |
+| `cadence-planner` | Coordination planning when a task spans multiple independent workstreams (areas, services, files) and needs explicit dependencies plus parallelism mapped. |
 
 ## Contributing
 
