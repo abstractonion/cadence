@@ -9,11 +9,12 @@ When a bug, failing test, or unexpected behavior appears, do not patch the sympt
 
 ## Sequence
 
-1. **Reproduce.** If you can't trigger it deterministically, gather more evidence before forming a hypothesis. Read the stack trace, the relevant code path, and recent diffs touching those files.
-2. **One testable hypothesis at a time**, in a single sentence: "X is wrong because Y." Confirm by reading the exact code that would prove it, or by adding a temporary log/assertion — never by guessing from the error string alone.
-3. **3-strike rule.** If three hypotheses fail, stop. The bug is probably structural. Surface to the user: what was tried, what was ruled out, the next two reasonable directions.
-4. **Fix the cause, not the closest symptom.** The smallest diff that eliminates the actual problem. Resist refactoring adjacent code in the same commit.
-5. **Regression test that fails without the fix and passes with it.** A test that always passes proves nothing.
+1. **Prior art.** Before hypothesizing, search `docs/solutions/` (filenames, Symptom, Tags), `docs/learnings.md`, and `.cadence/learnings.md`. Cite any match that fits the current symptoms.
+2. **Reproduce.** If you can't trigger it deterministically, gather more evidence before forming a hypothesis. Read the stack trace, the relevant code path, and recent diffs touching those files.
+3. **One testable hypothesis at a time**, in a single sentence: "X is wrong because Y." Confirm by reading the exact code that would prove it, or by adding a temporary log/assertion — never by guessing from the error string alone.
+4. **3-strike rule.** If three hypotheses fail, stop. The bug is probably structural. Surface to the user: what was tried, what was ruled out, the next two reasonable directions — and add a solution doc per `capture-learnings`.
+5. **Fix the cause, not the closest symptom.** The smallest diff that eliminates the actual problem. Resist refactoring adjacent code in the same commit.
+6. **Regression test that fails without the fix and passes with it.** A test that always passes proves nothing.
 
 ## Red flags — slow down if you catch yourself doing these
 

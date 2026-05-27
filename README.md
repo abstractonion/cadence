@@ -2,15 +2,15 @@
 
 ## What this is
 
-Cadence is a personal workflow plugin that packages durable engineering rules and stack conventions for use across projects and accounts, on Cursor, Claude Code, and any other runtime that consumes Cursor rules or SKILL.md skills. The name reflects what it enforces: a deliberate rhythm of investigate → propose → implement → review → ship. Rules cover how to investigate, propose changes, review your own diffs, verify against runtime, commit cleanly, and ship — plus language- and stack-scoped conventions for TypeScript, frontend, and backend work.
+Cadence is a personal workflow plugin that packages durable engineering rules and stack conventions for use across projects and accounts, on Cursor, Claude Code, and any other runtime that consumes Cursor rules or SKILL.md skills. The name reflects what it enforces: a deliberate rhythm of investigate → propose → implement → review → test → ship → reflect. Rules cover how to investigate, propose changes, review your own diffs, verify against runtime, commit cleanly, ship, and capture cross-session learnings — plus language- and stack-scoped conventions for TypeScript, frontend, and backend work.
 
 ## What's in it
 
-33 rules / skills organized into five groups:
+34 rules / skills organized into five groups:
 
 | Group        | Purpose                                                                  | Count |
 |--------------|--------------------------------------------------------------------------|------:|
-| Workflow     | Always-on engineering loop — think, plan, build, review, test, ship      | 12    |
+| Workflow     | Engineering loop, learnings capture, and promotion (mostly always-on)  | 13    |
 | Universal    | Language-agnostic principles (imports, file size, refactor completeness) | 8     |
 | TypeScript   | TypeScript-only conventions (no `any`, named exports, `== null`)         | 4     |
 | Frontend     | Frontend patterns (API client, query options, theme tokens, React 19)    | 4     |
@@ -66,6 +66,29 @@ You can **disable individual cadence rules** in Cursor Settings → Rules, or tu
 
 On Claude Code and other SKILL.md runtimes, the same idea applies: repo skills override plugin skills on the same topic unless the user says otherwise.
 
+## Cross-session memory (flywheel)
+
+Cadence strengthens **institutional memory** without replacing propose-then-implement or verify-with-runtime. The seven-phase loop is the spine:
+
+| Phase | Cadence |
+| --- | --- |
+| Think | Restate the problem; prior-art in `propose-then-implement` |
+| Plan | `/plan`, `break-work-into-verifiable-steps` |
+| Build | Smallest diff; gated by approval |
+| Review | `/diff-check`, `self-review-before-handoff` |
+| Test | `verify-with-runtime`, `/verify` |
+| Ship | `/ship`, `clean-commits` |
+| Reflect | `/reflect`, `capture-learnings` |
+
+**Bootstrap in your project** (copy from this repo; paths are conventions, not plugin installs):
+
+| Artifact | Copy from | Place in project |
+| --- | --- | --- |
+| Learnings log | `templates/learnings.md` | `docs/learnings.md` (preferred) or `.cadence/learnings.md` |
+| Solution doc template | `templates/solutions/_template.md` | `docs/solutions/<slug>.md` per hard bug |
+
+Agents append one lesson per `/reflect`, search learnings and solutions during Think and Investigate, and may offer `/reflect` after `/ship`. Use `/promote` when a lesson meets promotion gates and should become a rule — always with explicit approval before writing.
+
 ## Repository layout
 
 ```
@@ -78,11 +101,12 @@ cadence/
 ├── skills/                      # Canonical source of truth — SKILL.md format
 │   ├── propose-then-implement/SKILL.md
 │   ├── no-any-no-casts/SKILL.md
-│   └── ... (33 total)
+│   └── ... (34 total)
 ├── rules/                       # Cursor-only flat .mdc shims, generated from skills/
 │   ├── propose-then-implement.mdc
 │   ├── no-any-no-casts.mdc
-│   └── ... (33 total)
+│   └── ... (34 total)
+├── templates/                   # Copy-into-project stubs (learnings log, solution docs)
 ├── commands/                    # User-invoked slash-command primers (single-turn modes)
 ├── agents/                      # Delegatable subagent personas
 ├── scripts/
@@ -118,7 +142,7 @@ Keep rules under ~50 lines and one concern per file — the discipline that make
 
 ## Commands
 
-User-invoked slash commands that prime the agent into a specific mode for a single turn. Each command names the phase of work it covers and anchors to the cadence rules that govern that phase. Use them when you want the agent to investigate, propose, plan, review, verify, ship, audit, or reflect — without dragging in unrelated behaviour. In **Cursor**, type the bare name (for example `/propose`); in **Claude Code** after `/plugin install cadence@cadence`, use the plugin namespace (for example `/cadence:propose`).
+User-invoked slash commands that prime the agent into a specific mode for a single turn. Each command names the phase of work it covers and anchors to the cadence rules that govern that phase. Use them when you want the agent to investigate, propose, plan, review, verify, ship, audit, reflect, or promote — without dragging in unrelated behaviour. In **Cursor**, type the bare name (for example `/propose`); in **Claude Code** after `/plugin install cadence@cadence`, use the plugin namespace (for example `/cadence:propose`).
 
 | Command | Description |
 | --- | --- |
@@ -130,6 +154,7 @@ User-invoked slash commands that prime the agent into a specific mode for a sing
 | `/ship` | Walk the clean-commits → lint/typecheck → verify → commit sequence. Refuses unrelated files. |
 | `/audit` | Apply all applicable cadence rules to the current file or staged diff and report findings. |
 | `/reflect` | Capture one durable lesson from the session into a learnings log. |
+| `/promote` | Review the latest learnings entry against promotion gates; draft a rule diff for approval — no writes without go. |
 
 *Cursor:* `/name` as listed. *Claude Code* (plugin install): `/cadence:name` (plugin `name` in `.claude-plugin/plugin.json` is `cadence`).
 

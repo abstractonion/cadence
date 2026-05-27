@@ -14,7 +14,8 @@ authored for this plugin (MIT-licensed; see `LICENSE`):
 - **`rules/`** — Generated Cursor rule shims (`.mdc`) produced from `skills/` via
   `scripts/sync.sh`; same substantive bodies with Cursor-specific frontmatter.
 - **`commands/`** — Slash-command workflows (for example `/propose`, `/plan`, `/verify`,
-  `/ship`, `/reflect`, `/investigate`, `/audit`, and `/diff-check`).
+  `/ship`, `/reflect`, `/promote`, `/investigate`, `/audit`, and `/diff-check`).
+- **`templates/`** — Copy-into-project stubs for learnings logs and solution docs.
 - **`agents/`** — Cadence subagent definitions (planner, investigator, reviewer, shipper).
 - **Plugin manifests** — `.cursor-plugin/plugin.json`, `.claude-plugin/plugin.json`,
   `scripts/cursor-rules.json`, and related packaging metadata.
