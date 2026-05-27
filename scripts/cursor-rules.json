@@ -29,6 +29,10 @@
       "description": "After shipping or debugging, capture one durable lesson per session",
       "alwaysApply": true
     },
+    "promote-recurring-learnings": {
+      "description": "When a lesson keeps recurring, draft a rule promotion for user approval — never auto-commit",
+      "alwaysApply": false
+    },
     "manage-context-window": {
       "description": "Treat the context window as a finite budget; prefer narrow reads, delegation, and clean handoffs over dragging stale context forward.",
       "alwaysApply": true

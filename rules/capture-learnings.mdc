@@ -25,13 +25,26 @@ A learning has four parts, even if it fits on one line:
 
 Example: "When adding a new status to the `OrderState` enum, also update `notifyOnTransition()` in `notifications/order.ts` — the dispatch table is keyed by enum and silently no-ops on unknown values. Observed: missed in the original change, caught in QA."
 
-## Where it lands
+## Learnings log paths
 
-Choose the lightest durable home:
+Append **one** dated entry per `/reflect`. Use the first path that exists; if neither exists, propose a path and ask the user once before writing:
+
+1. `docs/learnings.md`
+2. `.cadence/learnings.md`
+
+Bootstrap from Cadence's `templates/learnings.md` when starting a project log.
+
+## Solution docs
+
+After a **3-strike** investigation, a **multi-hypothesis** bug, or any fix you'd likely debug again — add `docs/solutions/<slug>.md` using the project's copy of `templates/solutions/_template.md` (Symptom, Root cause, Fix, Verification, Tags). One doc per distinct failure mode.
+
+## Where else it lands
+
+Choose the lightest durable home when a full log line is not enough:
 
 - A line in `TODOS.md` if it's a follow-up task.
-- A new or amended rule/skill if it's a recurring pattern worth enforcing.
+- `promote-recurring-learnings` if promotion gates are met (≥3 same pitfall, ≥2 areas, or worth enforcement).
 - A short comment next to the surprising code, if the lesson is local.
-- The PR description itself, if the lesson is about this PR's context.
+- The PR description itself, if the lesson is about this PR's context only.
 
-If this is the third time touching a problem in the same area, surface that — the fix is probably structural, not local.
+If this is the third time touching a problem in the same area, surface that — the fix is probably structural; add a solution doc and consider promotion review.
