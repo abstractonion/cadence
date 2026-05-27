@@ -33,7 +33,7 @@ Install via Cursor's plugin flow pointed at:
 https://github.com/abstractonion/cadence
 ```
 
-Once installed, all `.mdc` files under `rules/` are auto-discovered. Workflow rules apply on every chat; stack-scoped rules attach based on the file globs in their frontmatter.
+Once installed, all `.mdc` files under `rules/` are auto-discovered. Workflow rules apply on every chat; stack-scoped rules attach based on the file globs in their frontmatter. Slash commands and subagents ship from `commands/` and `agents/` via the same plugin manifest.
 
 ### Claude Code
 
@@ -71,7 +71,7 @@ On Claude Code and other SKILL.md runtimes, the same idea applies: repo skills o
 ```
 cadence/
 ├── .cursor-plugin/
-│   └── plugin.json              # Cursor manifest
+│   └── plugin.json              # Cursor manifest (rules, commands, agents)
 ├── .claude-plugin/
 │   ├── plugin.json              # Claude Code plugin manifest
 │   └── marketplace.json         # Claude Code marketplace registration
@@ -83,6 +83,8 @@ cadence/
 │   ├── propose-then-implement.mdc
 │   ├── no-any-no-casts.mdc
 │   └── ... (33 total)
+├── commands/                    # User-invoked slash-command primers (single-turn modes)
+├── agents/                      # Delegatable subagent personas
 ├── scripts/
 │   ├── cursor-rules.json        # per-rule Cursor frontmatter (globs / alwaysApply)
 │   └── sync.sh                  # regenerates rules/*.mdc from skills/*/SKILL.md
