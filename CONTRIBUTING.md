@@ -40,7 +40,7 @@ For the full command and subagent catalogs, see the [Commands](./README.md#comma
 
 ## New subagent checklist
 
-1. Create `agents/<name>.md` with YAML frontmatter: `name` and `description` (menu/trigger text; same cross-role legibility as commands). Read-only subagents (no file edits) should add `disallowedTools: Write, Edit` per [Claude Code subagent docs](https://code.claude.com/docs/en/sub-agents). Mutating workflows (e.g. `cadence-shipper`) omit tool restrictions.
+1. Create `agents/<name>.md` with YAML frontmatter: `name` and `description` (menu/trigger text; same cross-role legibility as commands). Read-only subagents (no file edits) should use an explicit allowlist — `tools: Read, Grep, Glob, Bash` — per [Claude Code subagent docs](https://code.claude.com/docs/en/sub-agents); do not rely on `disallowedTools: Write, Edit` alone (that still inherits Bash, MCP, and other tools). Agent bodies should say "no file edits (Write/Edit)", not "no mutating tools", unless you also deny Bash. Mutating workflows (e.g. `cadence-shipper`) omit `tools` restrictions.
 2. Body structure — all five sections, in order:
    - `# <Title>` — opening paragraph: remit, how the parent delegates, and what you refuse.
    - `## Scope` — what you do.
