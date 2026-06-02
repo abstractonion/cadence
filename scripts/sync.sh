@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
 #
-# Regenerate rules/<name>.mdc Cursor shims from the canonical skills/<name>/SKILL.md content.
+# Regenerate generated runtime shims from the canonical source tree.
 #
-# Cadence stores rule bodies once, under skills/, in Claude-Code-compatible SKILL.md format
-# (frontmatter: name + description-as-trigger). Cursor needs the same bodies wrapped with
-# its own frontmatter (description + globs / alwaysApply). This script reads
-# scripts/cursor-rules.json for the per-rule Cursor frontmatter, strips each SKILL.md's
-# frontmatter, and writes rules/<name>.mdc with the assembled output.
+# Cadence stores durable rule bodies under skills/<name>/SKILL.md. Cursor needs the same
+# bodies wrapped with its own frontmatter (description + globs / alwaysApply). This script
+# reads scripts/cursor-rules.json for per-rule Cursor frontmatter and writes rules/<name>.mdc.
+#
+# Command primers live in commands/<name>.md; sync generates Codex-friendly skills at
+# skills/cadence-<name>/SKILL.md (name + description frontmatter, command body preserved).
+#
+# Codex installs self-contained packages from plugins/cadence/, refreshed here from skills/,
+# assets/, legal files, and scripts/codex-plugin-README.md.
 #
 # Requires: jq.
 # Usage:  ./scripts/sync.sh
@@ -16,7 +20,11 @@ set -euo pipefail
 REPO_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 RULES_DIR="$REPO_ROOT/rules"
 SKILLS_DIR="$REPO_ROOT/skills"
+COMMANDS_DIR="$REPO_ROOT/commands"
 METADATA="$REPO_ROOT/scripts/cursor-rules.json"
+CODEX_PLUGIN_DIR="$REPO_ROOT/plugins/cadence"
+CODEX_MANIFEST_DIR="$CODEX_PLUGIN_DIR/.codex-plugin"
+CODEX_README_SRC="$REPO_ROOT/scripts/codex-plugin-README.md"
 
 if ! command -v jq >/dev/null 2>&1; then
   echo "error: jq is required (brew install jq)" >&2
@@ -25,6 +33,50 @@ fi
 
 [ -f "$METADATA" ] || { echo "error: $METADATA missing" >&2; exit 1; }
 [ -d "$SKILLS_DIR" ] || { echo "error: $SKILLS_DIR missing" >&2; exit 1; }
+[ -d "$COMMANDS_DIR" ] || { echo "error: $COMMANDS_DIR missing" >&2; exit 1; }
+
+# --- skills/cadence-<command>/ from commands/<command>.md ---
+
+command_skills=0
+for cmd_file in "$COMMANDS_DIR"/*.md; do
+  [ -f "$cmd_file" ] || continue
+  cmd_name=$(basename "$cmd_file" .md)
+  skill_name="cadence-$cmd_name"
+  skill_dir="$SKILLS_DIR/$skill_name"
+
+  cmd_description=$(
+    awk '
+      BEGIN { f = 0 }
+      /^---$/ { f++; next }
+      f == 1 && /^description:/ {
+        sub(/^description:[[:space:]]*/, "")
+        print
+        exit
+      }
+    ' "$cmd_file"
+  )
+  if [ -z "$cmd_description" ]; then
+    echo "warn: $cmd_file missing description — skipping $skill_name" >&2
+    continue
+  fi
+
+  body=$(awk 'BEGIN{f=0} /^---$/{f++; next} f>=2{print}' "$cmd_file" | sed -e '/./,$!d')
+
+  mkdir -p "$skill_dir"
+  {
+    printf -- '---\n'
+    printf 'name: %s\n' "$skill_name"
+    printf 'description: %s\n' "$cmd_description"
+    printf -- '---\n\n'
+    printf '%s\n' "$body"
+  } > "$skill_dir/SKILL.md"
+
+  command_skills=$((command_skills + 1))
+done
+
+echo "synced $command_skills command skills → $SKILLS_DIR/cadence-*/"
+
+# --- rules/*.mdc from durable skills + cursor-rules.json ---
 
 mkdir -p "$RULES_DIR"
 
@@ -43,8 +95,6 @@ for name in $names; do
   always_apply=$(jq -r --arg n "$name" 'if (.rules[$n] | has("alwaysApply")) then (.rules[$n].alwaysApply | tostring) else "" end' "$METADATA")
   globs=$(jq -r --arg n "$name" '.rules[$n].globs // empty' "$METADATA")
 
-  # Strip the SKILL.md frontmatter (the first two --- markers and everything between them);
-  # then drop any leading blank lines so we don't compound blank lines under the new frontmatter.
   body=$(awk 'BEGIN{f=0} /^---$/{f++; next} f>=2{print}' "$skill" | sed -e '/./,$!d')
 
   out="$RULES_DIR/$name.mdc"
@@ -65,3 +115,25 @@ for name in $names; do
 done
 
 echo "synced $written rules → $RULES_DIR"
+
+# --- plugins/cadence/ Codex package (skills only; no commands/agents copy) ---
+
+mkdir -p "$CODEX_PLUGIN_DIR"
+
+find "$CODEX_PLUGIN_DIR" -mindepth 1 -maxdepth 1 ! -name ".codex-plugin" -exec rm -rf {} +
+
+for path in skills assets LICENSE NOTICE.md PRIVACY.md SECURITY.md; do
+  if [ -e "$REPO_ROOT/$path" ]; then
+    cp -R "$REPO_ROOT/$path" "$CODEX_PLUGIN_DIR/$path"
+  fi
+done
+
+if [ -f "$CODEX_README_SRC" ]; then
+  cp "$CODEX_README_SRC" "$CODEX_PLUGIN_DIR/README.md"
+else
+  echo "warn: $CODEX_README_SRC missing — skipping Codex README" >&2
+fi
+
+[ -d "$CODEX_MANIFEST_DIR" ] || { echo "error: $CODEX_MANIFEST_DIR missing" >&2; exit 1; }
+
+echo "synced Codex package → $CODEX_PLUGIN_DIR"

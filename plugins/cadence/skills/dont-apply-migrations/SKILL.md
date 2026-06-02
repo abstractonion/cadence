@@ -1,0 +1,25 @@
+---
+name: dont-apply-migrations
+description: Use when making backend schema changes — generate the migration but stop short of applying it against any shared or production database.
+---
+
+# Generate migrations, don't apply them
+
+When schema changes are needed, generate the migration but stop short of applying it.
+
+## Do
+
+- Run the framework's `makemigrations` / `alembic revision --autogenerate` / equivalent.
+- Inspect the generated file and clean it up (rename, add data-migration ops, etc.).
+- Commit the migration with the model change in the same PR.
+
+## Don't
+
+- Don't run `migrate` / `alembic upgrade head` / equivalent against any database the user shares with other people or production.
+- Don't auto-apply migrations as part of "fixing" a failing test by mutating a shared DB.
+
+## Allowed
+
+- Applying migrations to a clearly local/throwaway database (an eval DB, an integration-test DB, a freshly-spawned local container) when that's the explicit task.
+
+For schema changes touching active production code paths, prefer a lockstep / two-step deploy. Flag it before merging.
