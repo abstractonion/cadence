@@ -1,0 +1,33 @@
+---
+name: react-compiler
+description: Use when writing or reviewing React 19 components with the Compiler enabled — default to no manual `useMemo` / `useCallback` / `React.memo`; reach for them only when referential identity genuinely matters.
+---
+
+# React 19 + Compiler: default to no manual memoization
+
+The React Compiler memoizes most renders for you. Manual memoization is now noise in the common case.
+
+## Default
+
+- No `useMemo` on object/array literals, derived values, or JSX.
+- No `useCallback` on event handlers passed to children.
+- No `React.memo` on regular components.
+
+## Use memoization only when referential identity matters
+
+- The value is stored in a Context provider and consumers depend on stable identity.
+- The value is in an effect dep array and re-running the effect on every render would be wrong.
+- The computation is genuinely expensive (measure first).
+
+## Effect dependencies
+
+- For event-like callbacks invoked inside effects, prefer `useEffectEvent` over recreating the callback with `useCallback`.
+- Keep effect deps tied to the actual trigger. If a complex object only exists to "be in deps", create it **inside** the effect.
+
+## When in doubt
+
+Write the simple version first. Add memoization only if a profiler or a re-render bug demands it.
+
+## Note
+
+This rule assumes React 19 with the React Compiler enabled. On older React (17/18) without the compiler, manual memoization is still load-bearing — disable this rule or invert its guidance for those projects.

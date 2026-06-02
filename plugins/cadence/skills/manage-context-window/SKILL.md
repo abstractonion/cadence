@@ -1,0 +1,28 @@
+---
+name: manage-context-window
+description: Use during long sessions to avoid context degradation — read narrowly, delegate heavy reads, checkpoint progress, and hand off rather than push through polluted context.
+---
+
+# Manage your context window
+
+A long session degrades. Vague language, skipped steps, half-finished tasks, and the same bug "fixed" three different ways are all symptoms of context pressure. Notice it early — quality drops gradually, well before any hard limit fires.
+
+## What to do, in order of preference
+
+1. **Read narrowly.** Use search to land on the few lines you need; don't paste whole files when a snippet suffices. Skim summaries or frontmatter before bodies.
+2. **Delegate heavy reads.** If answering one question would require loading a large file or long trace into main context, hand that question to a subagent and consume only its summary (see `delegate-with-fresh-context`).
+3. **Checkpoint.** When a long session is getting hazy, write the current state — what's done, what's next, what's known, what's unresolved — to a durable artifact (a PR description, a scratch doc, a TODO at the top of the file) so a fresh session can pick up cleanly.
+4. **Hand off.** If a phase is finished, end the session and start the next one clean. Don't push one more task through a polluted context just because you're already there.
+
+## Warning signs you're already degraded
+
+- You're reaching for "appropriate handling" or "standard pattern" instead of writing the actual code.
+- You're skipping steps you'd normally do (tests, runtime checks, scope diff).
+- A change you "just made" doesn't show up in the diff.
+- You've fixed the same symptom more than once.
+
+When you notice these: stop, summarize what's true, and either delegate the next piece or hand off to a fresh session.
+
+## What's worth keeping in main context
+
+The plan, the user's stated intent, the current diff, and the next verification command. Everything else is recoverable on demand.
