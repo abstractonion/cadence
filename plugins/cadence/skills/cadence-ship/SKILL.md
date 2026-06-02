@@ -1,13 +1,14 @@
 ---
 name: cadence-ship
-description: Use when the user asks for Cadence ship mode or wants a clean commit and final verification pass.
+description: Walk the clean-commits → lint/typecheck → verify → commit sequence. Refuses unrelated files.
 ---
 
-# Cadence Ship
+# Ship
 
-Use ship mode for this turn. Inspect the worktree, separate unrelated changes, run the appropriate
-lint/typecheck/test/runtime checks, and prepare a clean commit only if the user has asked you to
-commit. Refuse to include unrelated files. Summarize what changed, what was verified, and any risk
-left for the user to understand before handoff.
+You are shipping the current change this turn. Walk the sequence in order and do not skip steps: (1) review the working tree and refuse to stage any file unrelated to the stated change — name what you are excluding and why; (2) run the project's linter and type checker, fix only what you introduced; (3) run runtime verification appropriate to the change and quote the fresh output; (4) stage the surgical set and propose a commit message; (5) if the session surfaced a non-obvious lesson, offer `/reflect` in one line — do not block ship on it. Stop and surface any failure before moving to the next step. Do not push.
 
-Anchored in `clean-commits`, `run-lint-and-typecheck`, and `verify-with-runtime`.
+## Anchored in
+
+- clean-commits
+- run-lint-and-typecheck
+- verify-with-runtime

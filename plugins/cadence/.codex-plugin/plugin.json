@@ -23,7 +23,7 @@
   "interface": {
     "displayName": "Cadence",
     "shortDescription": "Engineering workflow guardrails and stack conventions for Codex.",
-    "longDescription": "Cadence packages durable engineering rules and workflow modes for Codex. It imports the canonical SKILL.md files and exposes Codex-friendly command shims for propose, investigate, plan, diff-check, verify, ship, audit, reflect, and promote.",
+    "longDescription": "Cadence packages durable engineering rules and workflow modes for Codex. Command primers are exposed as cadence-* skills (for example cadence-plan, cadence-verify, cadence-ship).",
     "developerName": "abstractonion",
     "category": "Coding",
     "capabilities": [
@@ -35,9 +35,9 @@
     "privacyPolicyURL": "https://github.com/abstractonion/cadence/blob/main/PRIVACY.md",
     "termsOfServiceURL": "https://github.com/abstractonion/cadence/blob/main/LICENSE",
     "defaultPrompt": [
-      "Use Cadence to plan this change.",
-      "Run a Cadence diff-check on my work.",
-      "Use Cadence to verify and ship this."
+      "Use cadence-plan to decompose this change.",
+      "Run cadence-diff-check on my work.",
+      "Use cadence-verify and cadence-ship on this branch."
     ],
     "logo": "./assets/logo.svg"
   }

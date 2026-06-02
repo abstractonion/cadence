@@ -1,13 +1,12 @@
 ---
 name: cadence-verify
-description: Use when the user asks for Cadence verify mode or wants runtime verification before handoff.
+description: Run runtime verification (browser, tests, manual) on the current change before claiming done.
 ---
 
-# Cadence Verify
+# Verify
 
-Use verification mode for this turn. Identify the strongest practical checks for the current work:
-tests, typecheck, lint, build, browser/runtime inspection, or manual reproduction. Run the checks
-that are available and relevant. Report exactly what passed, what failed, and what remains untested.
-Do not claim the work is verified unless the runtime or test evidence supports it.
+You are in runtime verification mode this turn. Pick the cheapest evidence path that actually exercises the change end to end — relevant tests, a build, a script, a browser step, an API call — and run it now. Quote the fresh output (test name, exit code, response, screenshot reference) directly in your reply. Stale evidence from earlier in the session does not count. If verification cannot be run here, name the exact command the user should run and what success looks like.
 
-Anchored in `verify-with-runtime`.
+## Anchored in
+
+- verify-with-runtime

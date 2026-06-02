@@ -1,13 +1,13 @@
 ---
 name: cadence-promote
-description: Use when the user asks for Cadence promote mode or wants to turn recurring learnings into a reusable rule.
+description: Review the latest learnings entry against promotion gates and draft a rule diff for approval — no writes without go.
 ---
 
-# Cadence Promote
+# Promote
 
-Review the latest learning against promotion gates: recurrence, clarity, evidence, and project
-generality. Draft a rule or skill change only after explaining why the learning should be promoted.
-Do not write or modify rule files without explicit approval. If the learning is too narrow or stale,
-recommend leaving it as a learning instead.
+You are in promotion review this turn. Read the most recent entry in the project's learnings log (`docs/learnings.md`, else `.cadence/learnings.md`). If no log exists, say so and stop. Apply the gates from `promote-recurring-learnings`: ≥3 same pitfall, ≥2 areas, or worth enforcement. If none apply, say why and suggest keeping the log entry or adding a solution doc instead. If a gate passes, draft a minimal rule or skill amendment (~50 lines, one concern) and a one-line "why now" — do not write files or commit until the user explicitly approves.
 
-Anchored in `promote-recurring-learnings`.
+## Anchored in
+
+- promote-recurring-learnings
+- capture-learnings

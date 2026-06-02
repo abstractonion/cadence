@@ -1,13 +1,14 @@
 ---
 name: cadence-audit
-description: Use when the user asks for Cadence audit mode or wants applicable Cadence rules applied to a file or diff.
+description: Apply all applicable cadence rules to the current file or staged diff and report findings.
 ---
 
-# Cadence Audit
+# Audit
 
-Apply the relevant Cadence rules to the current file, task, or diff. Prefer actionable findings over
-style commentary. Group findings by severity, cite evidence with paths and line numbers, and name
-which Cadence rule is being applied. If a project-local rule conflicts with Cadence, follow the
-project-local rule and mention the conflict once.
+You are auditing the current file or staged diff this turn against every applicable cadence rule. Do not edit anything. For each finding, name the rule, quote the offending lines, and state the concrete fix in one sentence. Group findings by severity (blocker, should-fix, nit) and skip rules that do not apply to this code — do not pad the report. End with a short verdict: clean, fix-before-ship, or rework.
 
-Anchored in `prefer-project-local-rules`.
+## Anchored in
+
+- self-review-before-handoff
+- run-lint-and-typecheck
+- verify-with-runtime

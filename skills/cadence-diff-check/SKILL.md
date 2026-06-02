@@ -1,13 +1,12 @@
 ---
 name: cadence-diff-check
-description: Use when the user asks for Cadence diff-check mode or wants a self-review of current changes.
+description: Self-review the staged diff like a stranger, with quoted evidence. Surfaces scope drift and weak claims.
 ---
 
-# Cadence Diff Check
+# Diff Check
 
-Review the current diff like an independent reviewer. Focus on behavior changes, scope drift,
-missing tests, risky assumptions, and claims that are not backed by evidence. Quote concrete file
-paths and line numbers where possible. Findings should lead the response, ordered by severity. If
-there are no findings, say that clearly and note any residual verification gaps.
+You are reviewing the current diff this turn — staged changes first, then unstaged if relevant. Read it as a stranger who does not trust the author. Flag scope drift (changes unrelated to the stated intent), incomplete refactors, missing callers, unsupported claims, and anywhere the diff promises more than it delivers. Quote the specific lines or hunks you are citing; vague review notes are not allowed. Do not edit files — produce a review only, ending with a clear ship / hold verdict.
 
-Anchored in `self-review-before-handoff`.
+## Anchored in
+
+- self-review-before-handoff
