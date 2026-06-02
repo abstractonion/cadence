@@ -37,6 +37,20 @@ fi
 
 # --- skills/cadence-<command>/ from commands/<command>.md ---
 
+pruned=0
+for skill_dir in "$SKILLS_DIR"/cadence-*; do
+  [ -d "$skill_dir" ] || continue
+  cmd_name="${skill_dir##*/cadence-}"
+  if [ ! -f "$COMMANDS_DIR/$cmd_name.md" ]; then
+    rm -rf "$skill_dir"
+    pruned=$((pruned + 1))
+    echo "removed orphaned skill → $skill_dir (no commands/$cmd_name.md)" >&2
+  fi
+done
+if [ "$pruned" -gt 0 ]; then
+  echo "pruned $pruned orphaned cadence-* skill(s)"
+fi
+
 command_skills=0
 for cmd_file in "$COMMANDS_DIR"/*.md; do
   [ -f "$cmd_file" ] || continue

@@ -27,6 +27,8 @@ Slash-command primers from the main repo are exposed as skills named `cadence-<c
 
 Durable workflow and stack rules load automatically from the other `skills/` entries when their descriptions match the task.
 
+Subagent definitions and prompt templates from the main repo are not bundled in this Codex package; see [agents/](https://github.com/abstractonion/cadence/tree/main/agents) and [templates/](https://github.com/abstractonion/cadence/tree/main/templates) in the source repo.
+
 ## More
 
 - Full command and rule catalog: [github.com/abstractonion/cadence](https://github.com/abstractonion/cadence)
