@@ -12,9 +12,6 @@
 # Codex installs self-contained packages from plugins/cadence/, refreshed here from skills/,
 # assets/, legal files, and scripts/codex-plugin-README.md.
 #
-# Codex installs plugins from self-contained marketplace package directories, so this also
-# refreshes plugins/cadence from the repo's canonical runtime artifacts.
-#
 # Requires: jq.
 # Usage:  ./scripts/sync.sh
 
