@@ -1,6 +1,6 @@
 ---
 name: explicit-undefined
-description: Use when typing data-shaped TypeScript fields or props — prefer `T | undefined` over `field?: T` so callers must reason about the missing case.
+description: "Use when typing data-shaped TypeScript fields or props — prefer `T | undefined` over `field?: T` so callers must reason about the missing case."
 ---
 
 # TypeScript: prefer explicit `| undefined` over optional `?:`
