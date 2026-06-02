@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 #
-# Regenerate rules/<name>.mdc Cursor shims from the canonical skills/<name>/SKILL.md content.
+# Regenerate generated runtime shims from the canonical source tree.
 #
 # Cadence stores rule bodies once, under skills/, in Claude-Code-compatible SKILL.md format
 # (frontmatter: name + description-as-trigger). Cursor needs the same bodies wrapped with
 # its own frontmatter (description + globs / alwaysApply). This script reads
 # scripts/cursor-rules.json for the per-rule Cursor frontmatter, strips each SKILL.md's
 # frontmatter, and writes rules/<name>.mdc with the assembled output.
+#
+# Codex installs plugins from self-contained marketplace package directories, so this also
+# refreshes plugins/cadence from the repo's canonical runtime artifacts.
 #
 # Requires: jq.
 # Usage:  ./scripts/sync.sh
@@ -17,6 +20,8 @@ REPO_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 RULES_DIR="$REPO_ROOT/rules"
 SKILLS_DIR="$REPO_ROOT/skills"
 METADATA="$REPO_ROOT/scripts/cursor-rules.json"
+CODEX_PLUGIN_DIR="$REPO_ROOT/plugins/cadence"
+CODEX_MANIFEST_DIR="$CODEX_PLUGIN_DIR/.codex-plugin"
 
 if ! command -v jq >/dev/null 2>&1; then
   echo "error: jq is required (brew install jq)" >&2
@@ -65,3 +70,16 @@ for name in $names; do
 done
 
 echo "synced $written rules → $RULES_DIR"
+
+mkdir -p "$CODEX_PLUGIN_DIR"
+
+find "$CODEX_PLUGIN_DIR" -mindepth 1 -maxdepth 1 ! -name ".codex-plugin" -exec rm -rf {} +
+for path in skills commands agents templates assets README.md LICENSE NOTICE.md PRIVACY.md SECURITY.md; do
+  if [ -e "$REPO_ROOT/$path" ]; then
+    cp -R "$REPO_ROOT/$path" "$CODEX_PLUGIN_DIR/$path"
+  fi
+done
+
+[ -d "$CODEX_MANIFEST_DIR" ] || { echo "error: $CODEX_MANIFEST_DIR missing" >&2; exit 1; }
+
+echo "synced Codex package → $CODEX_PLUGIN_DIR"

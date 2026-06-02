@@ -1,0 +1,23 @@
+---
+name: complete-refactors
+description: Use when renaming, moving, or restructuring code — update every call site, test, fixture, and reference in the same change; no compat aliases or follow-up TODOs.
+---
+
+# Refactors land complete
+
+When you rename, move, restructure, or change the signature of something, finish the job in the same change.
+
+## In the same PR
+
+- Update every call site, import, and test.
+- Update any monkeypatch / mock paths that referenced the old location.
+- Update fixtures, snapshots, evals, and docs that reference the old shape.
+- Search for the old name across the repo before declaring done.
+
+## Don't
+
+- Don't leave a re-export alias "for now" unless the user explicitly asked for a staged migration.
+- Don't leave dead code paths that handle the old shape "just in case".
+- Don't ship a half-renamed module and a follow-up TODO.
+
+If the refactor is too large to land complete, stop and propose splitting it before starting.

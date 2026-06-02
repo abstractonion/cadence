@@ -1,0 +1,37 @@
+---
+name: promote-recurring-learnings
+description: Use when a captured lesson keeps recurring — decide whether to promote it into a project rule/skill or a Cadence PR; never auto-commit new rules.
+---
+
+# Promote recurring learnings
+
+A learnings log compounds session memory. A **rule or skill** compounds enforcement. Promote only when the cost of forgetting is higher than the cost of another guardrail.
+
+## Promotion gates
+
+Promote when **any** of these is true:
+
+- The same pitfall appeared **≥3** times (learnings log, PRs, or sessions).
+- The lesson applies across **≥2** distinct areas or features.
+- The team would benefit from **enforcement**, not just documentation.
+
+If none apply, keep the entry in the learnings log or a solution doc.
+
+## What to produce
+
+1. A **draft** rule or skill body (~50 lines max, one concern) — or a minimal amendment to an existing project rule.
+2. A one-line **why now** tied to observed incidents.
+3. For portable patterns, note that a **Cadence plugin PR** may be appropriate instead of a repo-only rule.
+
+## What never to do
+
+- Do not commit or enable new rules without explicit user approval ("go", "proceed", a picked option).
+- Do not auto-generate rules from every `/reflect` entry.
+- Do not weaken `propose-then-implement` or `verify-with-runtime` to ship a promotion faster.
+
+## Where it lands
+
+- **Project:** `.cursor/rules/`, `AGENTS.md`, or repo `skills/` — follow that repo's conventions.
+- **Cadence:** open a PR against the plugin when the pattern is stack-agnostic and belongs in the baseline.
+
+See `capture-learnings` for learnings paths and solution docs.

@@ -1,0 +1,44 @@
+{
+  "name": "cadence",
+  "version": "0.4.0",
+  "description": "A disciplined workflow plugin for Cursor, Claude Code, Codex, and other SKILL.md runtimes: propose, investigate, implement, review, verify, ship, and reflect.",
+  "author": {
+    "name": "abstractonion",
+    "url": "https://github.com/abstractonion"
+  },
+  "homepage": "https://github.com/abstractonion/cadence",
+  "repository": "https://github.com/abstractonion/cadence",
+  "license": "MIT",
+  "keywords": [
+    "workflow",
+    "rules",
+    "skills",
+    "code-quality",
+    "engineering-loop",
+    "typescript",
+    "react",
+    "discipline"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Cadence",
+    "shortDescription": "Engineering workflow guardrails and stack conventions for Codex.",
+    "longDescription": "Cadence packages durable engineering rules and workflow modes for Codex. It imports the canonical SKILL.md files and exposes Codex-friendly command shims for propose, investigate, plan, diff-check, verify, ship, audit, reflect, and promote.",
+    "developerName": "abstractonion",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/abstractonion/cadence",
+    "privacyPolicyURL": "https://github.com/abstractonion/cadence/blob/main/PRIVACY.md",
+    "termsOfServiceURL": "https://github.com/abstractonion/cadence/blob/main/LICENSE",
+    "defaultPrompt": [
+      "Use Cadence to plan this change.",
+      "Run a Cadence diff-check on my work.",
+      "Use Cadence to verify and ship this."
+    ],
+    "logo": "./assets/logo.svg"
+  }
+}
