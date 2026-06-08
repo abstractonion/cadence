@@ -1,0 +1,32 @@
+---
+description: After parallel subagents return — inspect combined diff, resolve wiring conflicts, run fresh checks.
+alwaysApply: false
+---
+
+# Verify parallel integration
+
+Parallel subagents each verified their slice. The parent must verify the **combined** branch: overlaps, wiring gaps, and regressions that no single stream would catch.
+
+## When this applies
+
+- Two or more subagents have returned on the same branch.
+- You are about to declare the multi-stream feature done or open a PR.
+
+## Steps
+
+1. **Survey the diff.** Run `git diff --stat` (and `git diff` on shared or suspicious paths). Confirm every expected stream landed and no stream touched out-of-scope files.
+2. **Conflict and duplicate check.** Look for duplicate exports, double registrations (routes, handlers, providers), conflicting types, or two implementations of the same helper. Resolve in the parent — do not leave "pick one later" merges.
+3. **Key wiring files.** Open the integration points each stream depended on (barrels, routers, DI setup, feature flags, schema migrations). Confirm each stream's output is actually connected, not just present in isolation.
+4. **Run tests.** Execute the project's test suite (or the smallest superset that covers all touched areas). Paste fresh output — stale per-stream results do not count (see `verify-with-runtime`).
+5. **Run lint and typecheck.** Run the project's linter and type checker; fix anything introduced across streams (see `run-lint-and-typecheck`).
+
+## What not to do
+
+- Don't merge subagent reports without reading the combined diff yourself.
+- Don't assume green tests from one stream cover another stream's paths.
+- Don't ship with unresolved conflicts, duplicate wiring, or parent-skipped integration files.
+
+## Anchored in
+
+- `verify-with-runtime`
+- `run-lint-and-typecheck`

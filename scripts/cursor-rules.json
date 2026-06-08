@@ -136,6 +136,18 @@
     "async-orm-relations": {
       "description": "Backend — in async code, eagerly fetch related ORM fields; don't rely on implicit lazy loading.",
       "globs": "**/*.py"
+    },
+    "eli5-di10": {
+      "description": "ELI5 / die-in-10 compression — analogy-first plain-English answers, not ranked options or approval gates.",
+      "alwaysApply": false
+    },
+    "parallel-workstreams": {
+      "description": "Partition multi-scope work, lock decisions in the parent, fan out subagents, then integrate.",
+      "alwaysApply": false
+    },
+    "verify-parallel-integration": {
+      "description": "After parallel subagents return — inspect combined diff, resolve wiring conflicts, run fresh checks.",
+      "alwaysApply": false
     }
   }
 }

@@ -11,4 +11,3 @@ You are mining recent Cursor chats for durable working preferences this turn. De
 
 - capture-learnings
 - promote-recurring-learnings
-- promote

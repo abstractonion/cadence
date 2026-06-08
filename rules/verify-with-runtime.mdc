@@ -7,12 +7,15 @@ alwaysApply: true
 
 "Should work" is not evidence. Before claiming a change is done, produce fresh runtime evidence from the actual system.
 
-## What "done" requires, by change type
+## Evidence bundle
 
-- **UI / web frontend.** Open the page in a browser using whichever browser MCP / DevTools / Playwright integration the workspace exposes, and exercise the changed flow end-to-end. Capture a screenshot or accessibility snapshot showing the expected state. Check the console for errors after each interaction, not only on first load.
-- **API / backend.** Hit the endpoint against a running instance with realistic input. Paste the response. For state-changing endpoints, also show the post-call state.
-- **CLI / script.** Run it with at least one real input. Paste the output, including exit code.
-- **Library / pure function.** A passing test counts as evidence — but the test must fail without the change and pass with it.
+Package verification as an **evidence bundle** — required artifacts by change type:
+
+- **Library / pure function.** `test_name`, `red_output` (fail without the change), `green_output` (pass after the last edit).
+- **UI / web frontend.** Browser flow exercised end-to-end; console checked after each interaction; screenshot or accessibility snapshot of expected state.
+- **API / backend.** `exit_code` or HTTP status + response/output; for state-changing calls, post-call state too.
+- **CLI / script.** `exit_code` + stdout/stderr from at least one real input.
+- **Blocked.** `blocked_reason` plus what would need to be true to verify — do not paper over missing evidence.
 
 ## Verification gate before declaring done
 
@@ -24,5 +27,3 @@ If any code changed since the last evidence was gathered (a fix from review, a f
 - "It's a trivial change." Trivial changes break production routinely.
 - "The types check, so it's fine." Types are necessary, not sufficient.
 - "I'm confident." Confidence is not evidence.
-
-If verification is genuinely impossible in this environment (no browser available, no running server, no fixtures), say so explicitly and list what would need to be true to verify. Don't paper over it.

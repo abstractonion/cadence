@@ -13,6 +13,8 @@ For any new behavior, change to behavior, or bug fix, write the test before the 
 2. **Green.** Write the smallest code that makes it pass. No "while I'm here" features, no speculative options the test doesn't exercise.
 3. **Refactor.** Tidy without changing behavior. Tests stay green.
 
+Red and green outputs are the library evidence bundle for `verify-with-runtime` (`test_name`, `red_output`, `green_output`).
+
 ## Bug fixes
 
 A bug fix without a test that reproduces the bug isn't a fix — it's a guess. Write the failing test first, verify it reproduces the bug, then fix. Now you also have a regression test the next session can rely on.

@@ -9,7 +9,6 @@ You are owning a pull request to green this turn. Delegate to the `cadence-pr-ow
 
 ## Anchored in
 
-- cadence-pr-owner
 - clean-commits
 - run-lint-and-typecheck
 - verify-with-runtime
