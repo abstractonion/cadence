@@ -156,7 +156,7 @@ Keep rules under ~50 lines and one concern per file — the discipline that make
 
 ## Commands
 
-User-invoked slash commands that prime the agent into a specific mode for a single turn. Each command names the phase of work it covers and anchors to the cadence rules that govern that phase. Use them when you want the agent to investigate, propose, plan, review, verify, ship, audit, reflect, or promote — without dragging in unrelated behaviour. In **Cursor**, type the bare name (for example `/propose`); in **Claude Code** after `/plugin install cadence@cadence`, use the plugin namespace (for example `/cadence:propose`).
+User-invoked slash commands that prime the agent into a specific mode for a single turn. Each command names the phase of work it covers and anchors to the cadence rules that govern that phase. Use them when you want the agent to investigate, propose, plan, review, verify, ship, audit, reflect, promote, or tldr — without dragging in unrelated behaviour. In **Cursor**, type the bare name (for example `/propose`); in **Claude Code** after `/plugin install cadence@cadence`, use the plugin namespace (for example `/cadence:propose`).
 
 | Command | Codex skill | Description |
 | --- | --- | --- |
@@ -169,7 +169,7 @@ User-invoked slash commands that prime the agent into a specific mode for a sing
 | `/audit` | `cadence-audit` | Apply all applicable cadence rules to the current file or staged diff and report findings. |
 | `/reflect` | `cadence-reflect` | Capture one durable lesson from the session into a learnings log. |
 | `/promote` | `cadence-promote` | Review the latest learnings entry against promotion gates; draft a rule diff for approval — no writes without go. |
-| `/tldr` | `cadence-tldr` | One-turn compressed explanation — analogy first, ~150 words, no code or options. |
+| `/tldr` | `cadence-tldr` | One-turn compressed explanation — analogy-first, ~150 words, no code or options. |
 | `/own-pr` | `cadence-own-pr` | Babysit PR #N until it settles — green required CI and actionable review addressed; ongoing loop, not a single pass. |
 | `/workflow-from-chats` | `cadence-workflow-from-chats` | Mine recent chats for durable preferences and propose Cadence artifacts (rules, skills, commands, or subagents). |
 

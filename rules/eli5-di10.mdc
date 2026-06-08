@@ -5,7 +5,9 @@ alwaysApply: false
 
 # ELI5 / die-in-10 compression
 
-When the user asks for ELI5, a ten-second explanation, plain English, or "in similar fashion," switch to compression mode. Deliver understanding, not a decision menu. This is separate from propose-then-implement: no A/B/C options, no "pick one," no waiting for an approval verb.
+When compression triggers fire (ELI5, tldr, die in 10, plain-English overload, "in similar fashion"), switch to compression mode. Deliver understanding, not a decision menu. **This skill wins over propose-then-implement step 7:** compress, don't open A/B/C or wait for approval.
+
+Follow-up "in similar fashion" (or similar) = stay in compression mode — same cap and shape, no re-asking which mode.
 
 ## How to answer
 
@@ -13,7 +15,8 @@ When the user asks for ELI5, a ten-second explanation, plain English, or "in sim
 2. **Hard cap.** At most 8–10 short lines, roughly 150 words total. One idea per line; cut qualifiers and caveats unless safety-critical.
 3. **No clutter.** No tables, bullet forests, file paths, identifiers, or code unless the user explicitly asked for them. Jargon only if you define it in the same breath.
 4. **One next action.** If a natural follow-up exists (run a test, pick a direction, paste a log), end with a single sentence naming it. Do not list multiple branches or reopen proposal mode.
-5. **Stay in lane.** If the user also wants implementation, they will say so. Compression mode does not authorize edits, commits, or tool runs by itself.
+5. **Optional sign-off.** When it fits naturally, end with a crisp closer — e.g. one-line "that's it" plus a single next step. Tasteful, not mandatory every turn.
+6. **Stay in lane.** Compression mode does not authorize edits, commits, or tool runs by itself unless the user clearly authorized execution.
 
 ## When this applies vs propose-then-implement
 
