@@ -17,13 +17,13 @@ Restate the goal in one sentence. Count independent workstreams. List dependenci
 
 ## 2. Route
 
-In Cursor/Claude Code with `agents/`, delegate to `cadence-planner` etc. when subagents available; in Codex invoke `cadence-*` skills only.
+Use packaged `cadence-*` skills in all runtimes. In Cursor/Claude Code with `agents/`, you may delegate to `cadence-planner`, `cadence-shipper`, or `cadence-pr-owner` subagents instead of the matching skill when available.
 
 - **Bug / unknown behavior** → `cadence-investigate` first; no patches until RCA.
 - **Design / product choices** → `cadence-propose` per `propose-then-implement`; wait for approval before build.
 - **Single thread, clear scope** → `cadence-plan` + `break-work-into-verifiable-steps`; at most one subagent if the slice is self-contained.
-- **Two or more disjoint scopes** → `cadence-planner`, then `cadence-parallel` + `parallel-workstreams`.
-- **Ready to land** → `cadence-shipper` or `cadence-ship`.
+- **Two or more disjoint scopes** → `cadence-parallel` + `parallel-workstreams` (Cursor may use `cadence-planner` first for coordination).
+- **Ready to land** → `cadence-ship`.
 - **Open PR needs tending** → `cadence-own-pr`.
 - **Post-parallel (N>1 returned)** → `cadence-integrate` + `verify-parallel-integration`.
 
