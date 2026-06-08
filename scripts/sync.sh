@@ -74,6 +74,17 @@ for cmd_file in "$COMMANDS_DIR"/*.md; do
     continue
   fi
 
+  disable_model_invocation=$(
+    awk '
+      BEGIN { f = 0 }
+      /^---$/ { f++; next }
+      f == 1 && /^disable-model-invocation:[[:space:]]*true[[:space:]]*$/ {
+        print "true"
+        exit
+      }
+    ' "$cmd_file"
+  )
+
   body=$(awk 'BEGIN{f=0} /^---$/{f++; next} f>=2{print}' "$cmd_file" | sed -e '/./,$!d')
 
   mkdir -p "$skill_dir"
@@ -81,6 +92,9 @@ for cmd_file in "$COMMANDS_DIR"/*.md; do
     printf -- '---\n'
     printf 'name: %s\n' "$skill_name"
     printf 'description: %s\n' "$cmd_description"
+    if [ "$disable_model_invocation" = "true" ]; then
+      printf 'disable-model-invocation: true\n'
+    fi
     printf -- '---\n\n'
     printf '%s\n' "$body"
   } > "$skill_dir/SKILL.md"

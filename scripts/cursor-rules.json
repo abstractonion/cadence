@@ -41,6 +41,10 @@
       "description": "For self-contained subtasks, delegate to a fresh subagent with a precise brief instead of inheriting your conversation context.",
       "alwaysApply": true
     },
+    "scope-and-dispatch": {
+      "description": "Gauge scope and dependencies; dispatch adequate subagents serial or parallel.",
+      "alwaysApply": true
+    },
     "break-work-into-verifiable-steps": {
       "description": "Decompose non-trivial work into a sequence of small, independently verifiable steps with explicit acceptance checks per step.",
       "alwaysApply": true
@@ -136,6 +140,22 @@
     "async-orm-relations": {
       "description": "Backend — in async code, eagerly fetch related ORM fields; don't rely on implicit lazy loading.",
       "globs": "**/*.py"
+    },
+    "eli5-di10": {
+      "description": "Explicit-only ELI5 / die-in-10 compression — analogy-first answers when the user clearly asks; never self-trigger or offer /tldr.",
+      "alwaysApply": false
+    },
+    "parallel-workstreams": {
+      "description": "Partition multi-scope work, lock decisions in the parent, fan out subagents, then integrate.",
+      "alwaysApply": false
+    },
+    "verify-parallel-integration": {
+      "description": "After parallel subagents return — inspect combined diff, resolve wiring conflicts, run fresh checks.",
+      "alwaysApply": false
+    },
+    "isolated-worktree": {
+      "description": "Sibling git worktree for parallel agents or PR work — never disturb the main checkout.",
+      "alwaysApply": false
     }
   }
 }

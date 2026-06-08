@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Verify
 
-You are in runtime verification mode this turn. Pick the cheapest evidence path that actually exercises the change end to end — relevant tests, a build, a script, a browser step, an API call — and run it now. Quote the fresh output (test name, exit code, response, screenshot reference) directly in your reply. Stale evidence from earlier in the session does not count. If verification cannot be run here, name the exact command the user should run and what success looks like.
+You are in runtime verification mode this turn. Pick the cheapest path that exercises the change end to end — relevant tests, a build, a script, a browser step, an API call — and run it now. Return an evidence bundle per `verify-with-runtime` (library: `test_name` + red/green output; UI: flow + console; API/CLI: `exit_code` + output; blocked: `blocked_reason`). Stale evidence from earlier in the session does not count.
 
 ## Anchored in
 

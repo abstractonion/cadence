@@ -23,9 +23,11 @@ When a task is well-scoped and doesn't need the running conversation to succeed,
 ## What not to do
 
 - Don't dispatch a subagent with "figure out what's wrong" and no scope — it will get lost.
-- Don't dispatch parallel subagents that touch the same files — they'll conflict.
+- Don't dispatch parallel subagents that touch the same files — they'll conflict. Same branch with disjoint scopes: partition per `parallel-workstreams` first.
 - Don't trust a subagent's "done" report without checking the diff and re-running its verification fresh (see `verify-with-runtime`).
 
 ## After it returns
 
 Integrate the work the same way you'd review your own diff (see `self-review-before-handoff`): quote evidence, run the verification fresh, surface scope drift, and resolve conflicts before claiming done.
+
+**Multiple subagents on the same branch.** When two or more subagents have returned on one branch, do not claim done from per-stream reports alone. Run `verify-parallel-integration` on the combined diff: survey overlaps and wiring, resolve duplicate registrations, then run lint, typecheck, and tests fresh (see `verify-with-runtime`).

@@ -1,6 +1,7 @@
 ---
 name: cadence-reflect
 description: Capture one durable lesson from the session into a learnings log.
+disable-model-invocation: true
 ---
 
 # Reflect

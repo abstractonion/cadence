@@ -14,7 +14,7 @@ When a bug, failing test, or unexpected behavior appears, do not patch the sympt
 3. **One testable hypothesis at a time**, in a single sentence: "X is wrong because Y." Confirm by reading the exact code that would prove it, or by adding a temporary log/assertion — never by guessing from the error string alone.
 4. **3-strike rule.** If three hypotheses fail, stop. The bug is probably structural. Surface to the user: what was tried, what was ruled out, the next two reasonable directions — and add a solution doc per `capture-learnings`.
 5. **Fix the cause, not the closest symptom.** The smallest diff that eliminates the actual problem. Resist refactoring adjacent code in the same commit.
-6. **Regression test that fails without the fix and passes with it.** A test that always passes proves nothing.
+6. **Regression test that fails without the fix and passes with it.** A test that always passes proves nothing. Package as the library evidence bundle per `verify-with-runtime` (`test_name`, `red_output`, `green_output`).
 
 ## Red flags — slow down if you catch yourself doing these
 
