@@ -18,9 +18,14 @@ Pick one pattern per task and stick to it. Reuse an existing worktree when the b
 
 1. Resolve repo root: `git rev-parse --show-toplevel`.
 2. Check for an existing worktree: `git worktree list`.
-3. If missing, add at the sibling path on the target branch:
-   `git worktree add ../{name} {branch}` (fetch/checkout branch first if needed).
-4. Confirm `git branch --show-current` inside the worktree matches intent before editing.
+3. **Branch already has a worktree** — reuse that path; do not create a duplicate.
+4. **Branch only in main checkout** (common `/own-pr` case):
+   - User already on the PR branch in main → work in main for that PR, **or**
+   - Switch main to another branch first, then `git worktree add ../{name} {branch}`.
+   - Do **not** use `git worktree add -f` on the same branch for concurrent writes — it conflicts with one-branch-per-worktree.
+   - Optional parallel stream: `git worktree add -b {name}-wt origin/{branch}` — new local branch tracking remote.
+5. **Branch free** — add at sibling path: `git worktree add ../{name} {branch}` (fetch/checkout first if needed).
+6. Confirm `git branch --show-current` inside the worktree matches intent before editing.
 
 ## Rules
 
