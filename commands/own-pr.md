@@ -1,12 +1,12 @@
 ---
 name: own-pr
-description: Own PR #N until CI is green — triage comments, fix failures, resolve conflicts, push scoped fixes.
+description: Babysit PR #N until it settles — green required CI and actionable review addressed; ongoing loop, not a single pass.
 disable-model-invocation: true
 ---
 
 # Own PR
 
-You are owning a pull request to green this turn. Delegate to the `cadence-pr-owner` subagent with the PR number from the user's message (or ask if missing). The subagent works in a sibling worktree at `{repo}-pr{N}`, triages unresolved review threads, fixes in-scope CI failures, resolves merge conflicts, runs targeted lint and tests, commits and pushes scoped fixes, replies on threads, and polls CI until green or an explicit blocker. Do not merge or force-push. Return the PR URL, CI status, and any blockers.
+Delegate to the `cadence-pr-owner` subagent for **ongoing babysit** until the PR settles — not a single fix-and-exit pass. Pass the PR number from the user's message (or ask if missing). The subagent works in a sibling worktree at `{repo}-pr{N}`, runs the settle loop (each push → fresh CI + new comments → re-triage → fix → push → repeat), triages threads in parallel while CI runs, and stops when required CI is green, actionable review is addressed, or a human blocker surfaces. Do not merge or force-push. Return PR URL, CI status, review state, and blockers.
 
 ## Anchored in
 

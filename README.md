@@ -170,7 +170,7 @@ User-invoked slash commands that prime the agent into a specific mode for a sing
 | `/reflect` | `cadence-reflect` | Capture one durable lesson from the session into a learnings log. |
 | `/promote` | `cadence-promote` | Review the latest learnings entry against promotion gates; draft a rule diff for approval — no writes without go. |
 | `/tldr` | `cadence-tldr` | One-turn compressed explanation — analogy first, ~150 words, no code or options. |
-| `/own-pr` | `cadence-own-pr` | Own PR #N until CI is green — triage comments, fix failures, resolve conflicts, push scoped fixes. |
+| `/own-pr` | `cadence-own-pr` | Babysit PR #N until it settles — green required CI and actionable review addressed; ongoing loop, not a single pass. |
 | `/workflow-from-chats` | `cadence-workflow-from-chats` | Mine recent chats for durable preferences and propose Cadence artifacts (rules, skills, commands, or subagents). |
 
 *Cursor:* `/name` as listed. *Claude Code* (plugin install): `/cadence:name` (plugin `name` in `.claude-plugin/plugin.json` is `cadence`). *Codex:* invoke the `cadence-<name>` skill or use natural-language prompts (see § Codex).
@@ -185,7 +185,7 @@ Specialized personas the parent agent can delegate to with a fresh context windo
 | `cadence-reviewer` | Code review on a diff before commit or push. Use when the parent needs an independent read on quality, scope, and evidence. |
 | `cadence-shipper` | Final commit and verification pass before pushing. Use when the parent has working code and needs ship discipline applied. |
 | `cadence-planner` | Coordination planning when a task spans multiple independent workstreams (areas, services, files) and needs explicit dependencies plus parallelism mapped. |
-| `cadence-pr-owner` | Own a pull request until CI is green — triage comments, fix failures, resolve conflicts, and push scoped fixes. |
+| `cadence-pr-owner` | Babysit a pull request until it settles — green required CI and no unresolved actionable review threads; triage, fix, push, repeat. |
 
 ## Contributing
 
