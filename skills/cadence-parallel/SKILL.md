@@ -1,7 +1,6 @@
 ---
-name: parallel
+name: cadence-parallel
 description: Partition multi-scope work, lock decisions in the parent, fan out subagents, then integrate on return.
-disable-model-invocation: true
 ---
 
 # Parallel

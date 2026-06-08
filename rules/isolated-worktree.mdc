@@ -1,6 +1,6 @@
 ---
-name: isolated-worktree
-description: Use when multiple agents or long-running tasks need the same repo without disturbing the main checkout — create a sibling git worktree.
+description: Sibling git worktree for parallel agents or PR work — never disturb the main checkout.
+alwaysApply: false
 ---
 
 # Isolated worktree

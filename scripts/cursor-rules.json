@@ -148,6 +148,10 @@
     "verify-parallel-integration": {
       "description": "After parallel subagents return — inspect combined diff, resolve wiring conflicts, run fresh checks.",
       "alwaysApply": false
+    },
+    "isolated-worktree": {
+      "description": "Sibling git worktree for parallel agents or PR work — never disturb the main checkout.",
+      "alwaysApply": false
     }
   }
 }
