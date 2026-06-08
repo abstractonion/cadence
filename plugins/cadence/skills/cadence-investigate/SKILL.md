@@ -1,6 +1,7 @@
 ---
 name: cadence-investigate
 description: Root-cause a bug or unexpected behavior without patching. Ranks hypotheses, returns evidence, no file edits.
+disable-model-invocation: true
 ---
 
 # Investigate

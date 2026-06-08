@@ -1,6 +1,7 @@
 ---
 name: cadence-promote
 description: Review the latest learnings entry against promotion gates and draft a rule diff for approval — no writes without go.
+disable-model-invocation: true
 ---
 
 # Promote

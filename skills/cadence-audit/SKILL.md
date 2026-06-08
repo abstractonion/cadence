@@ -1,6 +1,7 @@
 ---
 name: cadence-audit
 description: Apply all applicable cadence rules to the current file or staged diff and report findings.
+disable-model-invocation: true
 ---
 
 # Audit

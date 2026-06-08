@@ -1,14 +1,16 @@
 ---
 name: own-pr
-description: Babysit PR #N until it settles — green required CI and actionable review addressed; ongoing loop, not a single pass.
+description: User-invoked only — babysit PR #N until it settles; green required CI and actionable review addressed; ongoing loop, not a single pass.
 disable-model-invocation: true
 ---
 
 # Own PR
 
+**Manual/user-invoked only** — do not auto-select this workflow from description matching. Enter PR babysit mode only when the user explicitly invoked `/own-pr` (or `/cadence:own-pr`).
+
 Babysit PR #N until settled — required CI green AND no unresolved actionable review threads. Ongoing loop, not a single pass. In Cursor/Claude Code, prefer delegating to the `cadence-pr-owner` subagent when available.
 
-Pass the PR number from the user's message (or ask if missing). Work in sibling worktree `{repo}-pr{N}` per `isolated-worktree`. Do not merge or force-push.
+Pass the PR number from the user's message (or ask if missing). Work in sibling worktree `{repo}-pr{N}` per `isolated-worktree`. Do not merge the PR into base (`gh pr merge`, Merge button) or force-push; merging base into head when behind is allowed.
 
 ## How to operate
 

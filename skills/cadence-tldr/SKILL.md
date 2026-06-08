@@ -1,6 +1,7 @@
 ---
 name: cadence-tldr
 description: User-invoked explicit compression only — analogy-first, ~150 words, no code or options. Valid when the user ran `/tldr` or used explicit compression phrases this turn.
+disable-model-invocation: true
 ---
 
 # TLDR

@@ -1,6 +1,7 @@
 ---
 name: cadence-propose
 description: Surface 1–3 options before any change. For design, product, or architecture decisions where you want choices, not work.
+disable-model-invocation: true
 ---
 
 # Propose

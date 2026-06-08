@@ -1,9 +1,12 @@
 ---
 name: cadence-parallel
-description: Partition multi-scope work, lock decisions in the parent, fan out subagents, then integrate on return.
+description: User-invoked only — partition multi-scope work, lock decisions in the parent, fan out subagents, then integrate on return.
+disable-model-invocation: true
 ---
 
 # Parallel
+
+**Manual/user-invoked only** — do not auto-select this workflow from description matching. Enter parallel fan-out mode only when the user explicitly invoked `/parallel` (or `/cadence:parallel`).
 
 You are in parallel fan-out mode this turn. Do not start coding in the parent. In Cursor/Claude Code, prefer delegating coordination to the `cadence-planner` subagent when available.
 

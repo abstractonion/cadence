@@ -1,6 +1,7 @@
 ---
 name: cadence-dispatch
 description: Gauge task scope and dependencies, then route to the right subagents and commands — serial or parallel.
+disable-model-invocation: true
 ---
 
 # Dispatch

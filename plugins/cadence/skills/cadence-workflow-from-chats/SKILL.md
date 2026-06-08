@@ -1,6 +1,7 @@
 ---
 name: cadence-workflow-from-chats
 description: Mine recent chats for durable preferences and propose Cadence artifacts (rules, skills, commands, or subagents).
+disable-model-invocation: true
 ---
 
 # Workflow From Chats

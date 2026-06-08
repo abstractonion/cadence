@@ -1,6 +1,7 @@
 ---
 name: cadence-integrate
 description: Post-parallel integration pass — survey combined diff, resolve wiring, run fresh checks.
+disable-model-invocation: true
 ---
 
 # Integrate
