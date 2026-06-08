@@ -138,7 +138,7 @@
       "globs": "**/*.py"
     },
     "eli5-di10": {
-      "description": "ELI5 / die-in-10 compression — analogy-first plain-English answers, not ranked options or approval gates.",
+      "description": "Explicit-only ELI5 / die-in-10 compression — analogy-first answers when the user clearly asks; never self-trigger or offer /tldr.",
       "alwaysApply": false
     },
     "parallel-workstreams": {

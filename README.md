@@ -171,7 +171,7 @@ User-invoked slash commands that prime the agent into a specific mode for a sing
 | `/audit` | `cadence-audit` | Apply all applicable cadence rules to the current file or staged diff and report findings. |
 | `/reflect` | `cadence-reflect` | Capture one durable lesson from the session into a learnings log. |
 | `/promote` | `cadence-promote` | Review the latest learnings entry against promotion gates; draft a rule diff for approval — no writes without go. |
-| `/tldr` | `cadence-tldr` | One-turn compressed explanation — analogy-first, ~150 words, no code or options. |
+| `/tldr` | `cadence-tldr` | User-invoked explicit compression only — analogy-first, ~150 words, no code or options. Valid when the user ran `/tldr` or used explicit compression phrases this turn. |
 | `/own-pr` | `cadence-own-pr` | Babysit PR #N until it settles — green required CI and actionable review addressed; ongoing loop, not a single pass. |
 | `/workflow-from-chats` | `cadence-workflow-from-chats` | Mine recent chats for durable preferences and propose Cadence artifacts (rules, skills, commands, or subagents). |
 

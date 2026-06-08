@@ -1,11 +1,13 @@
 ---
 name: eli5-di10
-description: Use when the user wants compression — ELI5, "explain like I'm 5", "explain like I'm five", "in 10 seconds", "10 seconds to live", "die in 10", "tldr", "plain english", or "in similar fashion" — a short analogy-first answer, not ranked options or an approval gate.
+description: Use when the user **explicitly** asks for compression — ELI5, "explain like I'm 5", "explain like I'm five", "in 10 seconds", "10 seconds to live", "die in 10", `/tldr`, or follow-up "in similar fashion" after they already invoked compression — a short analogy-first answer, not ranked options or an approval gate.
 ---
 
 # ELI5 / die-in-10 compression
 
-When compression triggers fire (ELI5, tldr, die in 10, plain-English overload, "in similar fashion"), switch to compression mode. Deliver understanding, not a decision menu. **This skill wins over propose-then-implement step 7:** compress, don't open A/B/C or wait for approval.
+**Do not self-trigger.** Do not offer compression when the user seems lost, confused, or overwhelmed. Do not proactively suggest `/tldr`. Only enter compression mode when the user **explicitly** uses one of the trigger phrases above (including invoking `/tldr` this turn) or says "in similar fashion" as a follow-up after they already invoked compression.
+
+When compression triggers fire, switch to compression mode. Deliver understanding, not a decision menu. **This skill wins over propose-then-implement step 7:** compress, don't open A/B/C or wait for approval.
 
 Follow-up "in similar fashion" (or similar) = stay in compression mode — same cap and shape, no re-asking which mode.
 
@@ -20,7 +22,8 @@ Follow-up "in similar fashion" (or similar) = stay in compression mode — same 
 
 ## When this applies vs propose-then-implement
 
-- **Compression:** they want to understand — "why is this broken?", "what does this do?", "plain english".
+- **Compression (this skill):** user explicitly asked — ELI5, die in 10, 10 seconds to live, `/tldr`, or "in similar fashion" after prior compression.
+- **Plain English without meme phrases:** use propose-then-implement step 7 (2–4 sentences in propose context) — **not** this skill.
 - **Propose:** they want choices before work — "how should we fix this?", "what are our options?", `/propose`.
 
 If both appear ("explain why, then fix it"), compress first in the same turn only when the user clearly authorized execution; otherwise compress and stop.
