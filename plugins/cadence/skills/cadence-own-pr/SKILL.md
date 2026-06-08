@@ -1,6 +1,6 @@
 ---
 name: cadence-own-pr
-description: User-invoked only — babysit PR #N until it settles; green required CI and actionable review addressed; ongoing loop, not a single pass.
+description: "Babysit PR #N until it settles — green required CI and actionable review addressed; ongoing loop, not a single pass."
 disable-model-invocation: true
 ---
 
