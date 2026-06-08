@@ -41,6 +41,10 @@
       "description": "For self-contained subtasks, delegate to a fresh subagent with a precise brief instead of inheriting your conversation context.",
       "alwaysApply": true
     },
+    "scope-and-dispatch": {
+      "description": "Gauge scope and dependencies; dispatch adequate subagents serial or parallel.",
+      "alwaysApply": true
+    },
     "break-work-into-verifiable-steps": {
       "description": "Decompose non-trivial work into a sequence of small, independently verifiable steps with explicit acceptance checks per step.",
       "alwaysApply": true
