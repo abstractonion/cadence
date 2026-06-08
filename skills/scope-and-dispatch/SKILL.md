@@ -9,7 +9,7 @@ Default parent orchestration for non-trivial work. Gauge before you code or fan 
 
 ## When to run
 
-Run for any non-trivial change: multi-file edits, unknown RCA, multiple areas or services, or an implementation/build request. **Skip** for pure questions, single-line fixes, or when the user already invoked a mode command (`/investigate`, `/propose`, `/plan`, `/dispatch`, etc.) this turn.
+Run for any non-trivial change: multi-file edits, unknown RCA, multiple areas or services, or an implementation/build request. **Skip** for pure questions, single-line fixes, or when the user already invoked a mode command (`cadence-investigate`, `cadence-propose`, `cadence-plan`, `cadence-dispatch`, etc.) this turn.
 
 ## 1. Gauge
 
@@ -17,13 +17,15 @@ Restate the goal in one sentence. Count independent workstreams. List dependenci
 
 ## 2. Route
 
-- **Bug / unknown behavior** → `cadence-investigator` or `/investigate` first; no patches until RCA.
-- **Design / product choices** → `/propose` per `propose-then-implement`; wait for approval before build.
-- **Single thread, clear scope** → `/plan` + `break-work-into-verifiable-steps`; at most one subagent if the slice is self-contained.
-- **Two or more disjoint scopes** → `cadence-planner`, then `/parallel` + `parallel-workstreams`.
-- **Ready to land** → `cadence-shipper` or `/ship`.
-- **Open PR needs tending** → `/own-pr` + `cadence-pr-owner`.
-- **Post-parallel (N>1 returned)** → `/integrate` + `verify-parallel-integration`.
+In Cursor/Claude Code with `agents/`, delegate to `cadence-planner` etc. when subagents available; in Codex invoke `cadence-*` skills only.
+
+- **Bug / unknown behavior** → `cadence-investigate` first; no patches until RCA.
+- **Design / product choices** → `cadence-propose` per `propose-then-implement`; wait for approval before build.
+- **Single thread, clear scope** → `cadence-plan` + `break-work-into-verifiable-steps`; at most one subagent if the slice is self-contained.
+- **Two or more disjoint scopes** → `cadence-planner`, then `cadence-parallel` + `parallel-workstreams`.
+- **Ready to land** → `cadence-shipper` or `cadence-ship`.
+- **Open PR needs tending** → `cadence-own-pr`.
+- **Post-parallel (N>1 returned)** → `cadence-integrate` + `verify-parallel-integration`.
 
 ## 3. Dispatch
 

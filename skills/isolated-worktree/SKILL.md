@@ -23,7 +23,7 @@ Pick one pattern per task and stick to it. Reuse an existing worktree when the b
    - User already on the PR branch in main → work in main for that PR, **or**
    - Switch main to another branch first, then `git worktree add ../{name} {branch}`.
    - Do **not** use `git worktree add -f` on the same branch for concurrent writes — it conflicts with one-branch-per-worktree.
-   - Optional parallel stream: `git worktree add -b {name}-wt ../{name}-wt origin/{branch}` — new local branch tracking remote.
+   - Optional parallel stream: `git worktree add -b {name}-wt ../{name}-wt origin/{branch}` — new local branch tracking remote. Push: `git push origin HEAD:{branch}` (remote branch name, not local `-wt` name) when `push.default=simple`.
 5. **Branch free** — add at sibling path: `git worktree add ../{name} {branch}` (fetch/checkout first if needed).
 6. Confirm `git branch --show-current` inside the worktree matches intent before editing.
 
