@@ -6,7 +6,24 @@ disable-model-invocation: true
 
 # Parallel
 
-You are in parallel fan-out mode this turn. Do not start coding in the parent. If the task has two or more independent scopes with disjoint file ownership, delegate coordination to `cadence-planner` first. Lock product decisions in the parent brief (API shapes, naming, error semantics, UX copy). Partition streams per `parallel-workstreams` — exact paths per subagent, no overlapping writes. Spawn fresh subagents per `delegate-with-fresh-context` with the four-field brief (goal, scope, locked decisions, verify output). For same-repo isolation when multiple agents need the checkout, use sibling worktrees per `isolated-worktree`. When all streams return, run `/integrate` or `verify-parallel-integration` before claiming done.
+You are in parallel fan-out mode this turn. Do not start coding in the parent. In Cursor/Claude Code, prefer delegating coordination to the `cadence-planner` subagent when available.
+
+If two or more independent scopes with disjoint file ownership:
+
+## Coordinate (before fan-out)
+
+1. List workstreams (2–5) with one-sentence outputs and exact allowed paths per stream.
+2. Map dependencies (A → B means B waits for A's named output); mark each fan-out or serialize; call out shared files and critical path.
+3. Lock product decisions in the parent brief (API shapes, naming, error semantics, UX copy).
+4. Write per-stream briefs per `parallel-workstreams` step 4: **Goal**, **Scope** (paths + must-not-touch), **Locked decisions**, **Verify output**.
+
+Single workstream? Stop — use `/plan` instead.
+
+## Fan out and integrate
+
+- Spawn fresh subagents per `delegate-with-fresh-context` with the four-field brief; no overlapping writes.
+- Same-repo concurrency: sibling worktrees per `isolated-worktree`.
+- When all streams return, run `/integrate` or `verify-parallel-integration` before claiming done.
 
 ## Anchored in
 

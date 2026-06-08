@@ -6,10 +6,26 @@ disable-model-invocation: true
 
 # Own PR
 
-Delegate to the `cadence-pr-owner` subagent for **ongoing babysit** until the PR settles — not a single fix-and-exit pass. Pass the PR number from the user's message (or ask if missing). The subagent works in a sibling worktree at `{repo}-pr{N}`, runs the settle loop (each push → fresh CI + new comments → re-triage → fix → push → repeat), triages threads in parallel while CI runs, fans out non-overlapping subagents when comment fixes, CI diagnosis, and conflict resolution split (per `parallel-workstreams` and `delegate-with-fresh-context`), and stops when **(required CI green AND no unresolved actionable review threads) OR** an explicit human blocker surfaces. Do not merge or force-push. Return PR URL, CI status, review state, and blockers.
+Babysit PR #N until settled — required CI green AND no unresolved actionable review threads. Ongoing loop, not a single pass. In Cursor/Claude Code, prefer delegating to the `cadence-pr-owner` subagent when available.
+
+Pass the PR number from the user's message (or ask if missing). Work in sibling worktree `{repo}-pr{N}` per `isolated-worktree`. Do not merge or force-push.
+
+## How to operate
+
+1. `gh pr view N --json url,headRefName,baseRefName,mergeable,statusCheckRollup`; create worktree at `{repo}-pr{N}` if missing; confirm branch matches.
+2. Fetch unresolved review comments; filter resolved. Read only bodies/locations needed to act.
+3. **Partition before fixing.** Fan out fresh subagents per `parallel-workstreams` when comment triage, CI diagnosis, and conflict resolution are disjoint; serialize shared wiring.
+4. Fix valid issues; run lint, typecheck, targeted tests per `run-lint-and-typecheck` / `verify-with-runtime`; integrate subagent diffs before push.
+5. If mergeable blocked: merge base into head (`git merge origin/{base}` or `gh pr update-branch`); resolve conflicts. Rebase only if user explicitly approves force-with-lease.
+6. Stage PR-scoped files only; commit; push; reply on addressed threads.
+7. **Settle loop** — repeat: triage new threads while CI runs; poll `gh pr checks N`; fix and push.
+8. **Stop when:** required checks pass AND no unresolved actionable threads — **or** explicit human blocker (permissions, product decision, ambiguous scope).
+
+Return PR URL, CI status, review state, blockers.
 
 ## Anchored in
 
+- isolated-worktree
 - parallel-workstreams
 - delegate-with-fresh-context
 - clean-commits
